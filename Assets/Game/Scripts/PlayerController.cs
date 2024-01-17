@@ -8,15 +8,16 @@ public class PlayerController : CharacterController
     [SerializeField] float speed;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] Rigidbody rb;
-    public Transform skin;
-    public BulletController bulletPrefab;
+    [SerializeField] Transform skin;
+    [SerializeField] Transform transhoot;
 
-    void Start()
+    
+
+    private void Start()
     {
-        
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         if (Input.GetMouseButton(0))
@@ -33,6 +34,7 @@ public class PlayerController : CharacterController
         {
             ChangeAnim("IsIdle");
         }
+        StartCoroutine(Shoot());
     }
 
 
@@ -49,8 +51,17 @@ public class PlayerController : CharacterController
         return transform.position;
     }
 
-    public void Shoot()
+    IEnumerator Shoot()
     {
-        Instantiate(bulletPrefab, transform.position, transform.rotation);
+        if (currentAmmo == maxAmmoSize)
+        {
+            Instantiate(bulletPrefab, transhoot.transform.position, transform.rotation);
+            currentAmmo -= 1;
+            yield return new WaitForSeconds(2f);
+            if (currentAmmo < maxAmmoSize)
+            {
+                currentAmmo += 1;
+            }
+        }
     }
 }

@@ -2,17 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public class CharacterController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Animator anim;
+    private string currentAnim;
+    public BulletController bulletPrefab;
+    public int currentAmmo, maxAmmoSize = 1;
+    public int hp = 1;
 
-    // Update is called once per frame
-    void Update()
+
+    public void ChangeAnim(string animName)
     {
-        
+        if (currentAnim != animName)
+        {
+            if (currentAnim != null)
+            {
+                anim.ResetTrigger(currentAnim);
+            }
+            currentAnim = animName;
+            anim.SetTrigger(currentAnim);
+        }
     }
 }
