@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class CharacterController : MonoBehaviour
 {
     public Animator anim;
     private string currentAnim;
-    public BulletController bulletPrefab;
+    public GameObject bulletPrefab;
     public int currentAmmo, maxAmmoSize = 1;
     public int hp = 1;
     public float speed;
@@ -28,11 +30,13 @@ public class CharacterController : MonoBehaviour
         }
     }
 
-    protected IEnumerator Shoot()
+    protected IEnumerator Shoot(GameObject targetedEnemyObj)
     {
         if (currentAmmo == maxAmmoSize)
         {
-            Instantiate(bulletPrefab, transhoot.transform.position, transform.rotation);
+            Instantiate(bulletPrefab, transhoot.transform.position,transform.rotation);
+            bulletPrefab.GetComponent<BulletController>().target = targetedEnemyObj;
+            bulletPrefab.GetComponent<BulletController>().targetSet = true;
             currentAmmo -= 1;
             yield return new WaitForSeconds(2f);
             if (currentAmmo < maxAmmoSize)

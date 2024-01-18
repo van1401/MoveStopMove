@@ -15,7 +15,7 @@ public class DestroyController : MonoBehaviour
     void Destroy()
     {
         time++;
-        if (time == 300)
+        if (time == 500)
         {
             Destroy(this.gameObject);
             time = 0;

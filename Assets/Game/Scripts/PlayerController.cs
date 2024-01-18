@@ -36,8 +36,9 @@ public class PlayerController : CharacterController
         dist =  Vector3. Distance(transform.position, Target.position);
         if(dist < checkRange) 
         {
-            StartCoroutine(Shoot());
+            StartCoroutine(Shoot(Target.gameObject));
             skin.LookAt(Target.position);
+            transhoot.LookAt(Target.position);
         }
     }
 
