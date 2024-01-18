@@ -5,30 +5,19 @@ using UnityEngine;
 public class BulletController : MonoBehaviour
 {
     public int speed;
-    public Transform  target;
+    public Transform target;
+    public float turnSpeed;
 
-    void Start()
-    {
-        if (target == null)
-        {
-            //target = GameObject.Find("Bot").GetComponent<Transform>();
-            target = GameObject.FindWithTag("Enemy").transform;
-        }
-        if (target != null)
-        {
-            transform.position = target.position;
-        }
-    }
     void Update()
     {
         Move();
-    }
+        transform.Rotate(0, 10, 0 * turnSpeed * Time.deltaTime);
 
+    }
+    
     void Move()
     {
-        transform.position += Vector3.MoveTowards(transform.position, target.transform.position, 10f * speed * Time.deltaTime);
-        //dung movetowards
-        transform.Rotate(0, 10, 0);
+        transform.position += new Vector3(0,0,1) * speed * Time.deltaTime;
     }
     private void OnTriggerEnter(Collider other)
     {

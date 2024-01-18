@@ -5,10 +5,15 @@ using static Unity.VisualScripting.Dependencies.Sqlite.SQLite3;
 
 public class PlayerController : CharacterController
 {
+    public Transform Target;
+    public float dist;
+    public float checkRange;
 
     private void Start()
     {
+        Target = GameObject.FindGameObjectWithTag("Enemy").transform;    
     }
+
 
 
     void Update()
@@ -27,7 +32,13 @@ public class PlayerController : CharacterController
         {
             ChangeAnim("IsIdle");
         }
-        StartCoroutine(Shoot());
+
+        dist =  Vector3. Distance(transform.position, Target.position);
+        if(dist < checkRange) 
+        {
+            StartCoroutine(Shoot());
+            skin.LookAt(Target.position);
+        }
     }
 
 
