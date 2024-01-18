@@ -5,13 +5,6 @@ using static Unity.VisualScripting.Dependencies.Sqlite.SQLite3;
 
 public class PlayerController : CharacterController
 {
-    [SerializeField] float speed;
-    [SerializeField] LayerMask groundLayer;
-    [SerializeField] Rigidbody rb;
-    [SerializeField] Transform skin;
-    [SerializeField] Transform transhoot;
-
-    
 
     private void Start()
     {
@@ -39,7 +32,6 @@ public class PlayerController : CharacterController
 
 
 
-
     public Vector3 CheckGround(Vector3 nextPoint)
     {
         RaycastHit hit;
@@ -49,19 +41,5 @@ public class PlayerController : CharacterController
             return hit.point + Vector3.up * 0.01f;
         }
         return transform.position;
-    }
-
-    IEnumerator Shoot()
-    {
-        if (currentAmmo == maxAmmoSize)
-        {
-            Instantiate(bulletPrefab, transhoot.transform.position, transform.rotation);
-            currentAmmo -= 1;
-            yield return new WaitForSeconds(2f);
-            if (currentAmmo < maxAmmoSize)
-            {
-                currentAmmo += 1;
-            }
-        }
     }
 }
