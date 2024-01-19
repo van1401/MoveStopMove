@@ -1,23 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.UI;
 using static Unity.VisualScripting.Dependencies.Sqlite.SQLite3;
 
-public class PlayerController : CharacterController
+public class PlayerController : Character
 {
-    public Transform Target;
     public float dist;
     public float checkRange;
+    public Transform Target;
+    public List<Transform> Targets = new List<Transform>();
 
-    private void Start()
-    {
-        Target = GameObject.FindGameObjectWithTag("Enemy").transform;    
-    }
+    public LayerMask enemyLayer;
+    public float detectionRange;
 
 
 
     void Update()
     {
+
         if (Input.GetMouseButton(0))
         {
             Vector3 nextPoint = JoystickController.direct * speed * Time.deltaTime + transform.position;
@@ -32,17 +34,52 @@ public class PlayerController : CharacterController
         {
             ChangeAnim("IsIdle");
         }
-
-        dist =  Vector3. Distance(transform.position, Target.position);
-        if(dist < checkRange) 
-        {
-            StartCoroutine(Shoot(Target.gameObject));
-            skin.LookAt(Target.position);
-            transhoot.LookAt(Target.position);
-        }
+        //CheckRangeAttack();
+        CheckForEnemies();
     }
 
 
+    void CheckRangeAttack()
+    {
+        if (Targets == null)
+        {
+            return;             
+        }
+        for (int i = 0; i < Targets.Count; i++)  
+        {
+            dist = Vector3.Distance(transform.position, Targets[i].transform.position);
+
+            if (dist < checkRange)
+            {
+                StartCoroutine(Shoot(Targets[i].gameObject));
+                skin.LookAt(Targets[i].transform.position);
+                transhoot.LookAt(Targets[i].transform.position);
+            }
+        }
+    }
+    void CheckForEnemies()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, detectionRange, enemyLayer);
+
+        foreach (Collider enemyCollider in hitColliders)
+        {
+            Transform enemyTransform = enemyCollider.transform;
+            Debug.Log("Detected enemy at position: " + enemyTransform.position);
+
+            Target = enemyTransform;
+            dist = Vector3.Distance(transform.position, Target.transform.position);
+            if(dist > checkRange)
+            {
+               
+            }
+            if (dist < checkRange)
+            {
+                StartCoroutine(Shoot(Target.gameObject));
+                skin.LookAt(Target);
+                transhoot.LookAt(Target);
+            }
+        }
+    }
 
     public Vector3 CheckGround(Vector3 nextPoint)
     {

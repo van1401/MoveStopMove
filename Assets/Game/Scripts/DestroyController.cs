@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DestroyController : MonoBehaviour
 {
-    public int time;
+    public float time;
 
     // Update is called once per frame
     void Update()
@@ -15,7 +15,7 @@ public class DestroyController : MonoBehaviour
     void Destroy()
     {
         time++;
-        if (time == 500)
+        if (time >= 300)
         {
             Destroy(this.gameObject);
             time = 0;

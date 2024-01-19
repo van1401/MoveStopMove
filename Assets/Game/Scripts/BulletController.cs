@@ -14,37 +14,29 @@ public class BulletController : MonoBehaviour
     public float turnSpeed;
     public float damage;
 
+    
 
     void Update()
     {
         if(target == null)
         {
+            target = GameObject.FindGameObjectWithTag("Enemy");
             Destroy(gameObject);
         }
-        Move();
-        if (!stopProjectile ) 
+        if (!stopProjectile) 
         {
             if(Vector3.Distance(transform.position, target.transform.position) < 0.5f)
             {
                 stopProjectile = true;
                 Destroy(gameObject);
             }    
-        
         }
+        Move();
     }
-    
+
     void Move()
     {
-        transform.position = Vector3.MoveTowards(transform.position, target.transform.position, velocity * Time.deltaTime);
-        transform.Rotate(0, 10, 0 * turnSpeed * Time.deltaTime);
-        //transform.position += new Vector3(0, 0, 1) * speed * Time.deltaTime;
-        //transform.Rotate(0, 10, 0 * turnSpeed * Time.deltaTime);  
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (this.gameObject.CompareTag("Enemy"))
-        {
-            Destroy(other.gameObject);
-        }
+          transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z), velocity * Time.deltaTime);
+          transform.Rotate(0, 10, 0 * turnSpeed * Time.deltaTime);
     }
 }
