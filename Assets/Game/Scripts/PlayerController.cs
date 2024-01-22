@@ -10,8 +10,6 @@ public class PlayerController : Character
     public float dist;
     public float checkRange;
     public Transform Target;
-    public List<Transform> Targets = new List<Transform>();
-
     public LayerMask enemyLayer;
     public float detectionRange;
 
@@ -34,29 +32,11 @@ public class PlayerController : Character
         {
             ChangeAnim("IsIdle");
         }
-        //CheckRangeAttack();
         CheckForEnemies();
     }
 
 
-    void CheckRangeAttack()
-    {
-        if (Targets == null)
-        {
-            return;             
-        }
-        for (int i = 0; i < Targets.Count; i++)  
-        {
-            dist = Vector3.Distance(transform.position, Targets[i].transform.position);
 
-            if (dist < checkRange)
-            {
-                StartCoroutine(Shoot(Targets[i].gameObject));
-                skin.LookAt(Targets[i].transform.position);
-                transhoot.LookAt(Targets[i].transform.position);
-            }
-        }
-    }
     void CheckForEnemies()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, detectionRange, enemyLayer);
@@ -68,10 +48,6 @@ public class PlayerController : Character
 
             Target = enemyTransform;
             dist = Vector3.Distance(transform.position, Target.transform.position);
-            if(dist > checkRange)
-            {
-               
-            }
             if (dist < checkRange)
             {
                 StartCoroutine(Shoot(Target.gameObject));
