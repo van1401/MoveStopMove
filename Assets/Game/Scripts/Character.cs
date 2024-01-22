@@ -16,7 +16,8 @@ public class Character : MonoBehaviour
     public Rigidbody rb;
     public Transform skin;
     public Transform transhoot;
-
+    protected bool isShooting = false;
+    
     public void ChangeAnim(string animName)
     {
         if (currentAnim != animName)
@@ -34,11 +35,13 @@ public class Character : MonoBehaviour
     {
         if (currentAmmo == maxAmmoSize)
         {
-            Instantiate(bulletPrefab, transhoot.transform.position,Quaternion.identity);
+            Instantiate(bulletPrefab, transhoot.transform.position,Quaternion.identity); 
             bulletPrefab.GetComponent<BulletController>().target =  targetedEnemyObj;
             bulletPrefab.GetComponent<BulletController>().targetSet = true;
+            ChangeAnim("IsAttack");
+            Debug.Log("Check");
             currentAmmo -= 1;
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(2f);
             if (currentAmmo < maxAmmoSize)
             {
                 currentAmmo += 1;

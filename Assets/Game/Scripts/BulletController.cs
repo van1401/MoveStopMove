@@ -10,10 +10,9 @@ public class BulletController : MonoBehaviour
     public GameObject target;
     public bool targetSet;
     public bool stopProjectile;
-    public float velocity = 5;
+    private float velocity = 5;
     public float turnSpeed;
-    public float damage;
-
+    
     
 
     void Update()
@@ -38,5 +37,12 @@ public class BulletController : MonoBehaviour
     {
           transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z), velocity * Time.deltaTime);
           transform.Rotate(0, 10, 0 * turnSpeed * Time.deltaTime);
+    }
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.transform.gameObject.CompareTag("Enemy"))
+        {
+           Destroy(this.gameObject);
+        }
     }
 }

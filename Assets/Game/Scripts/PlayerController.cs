@@ -14,14 +14,19 @@ public class PlayerController : Character
     public float detectionRange;
 
 
-
     void Update()
     {
+        Move();
+        CheckForEnemies();
+    }
 
+
+    void Move()
+    {
         if (Input.GetMouseButton(0))
         {
             Vector3 nextPoint = JoystickController.direct * speed * Time.deltaTime + transform.position;
-            transform.position = CheckGround(nextPoint);     
+            transform.position = CheckGround(nextPoint);
             if (JoystickController.direct != Vector3.zero)
             {
                 skin.forward = JoystickController.direct;
@@ -32,11 +37,10 @@ public class PlayerController : Character
         {
             ChangeAnim("IsIdle");
         }
-        CheckForEnemies();
-    }
+    }   
 
 
-
+    
     void CheckForEnemies()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, detectionRange, enemyLayer);
@@ -44,14 +48,15 @@ public class PlayerController : Character
         foreach (Collider enemyCollider in hitColliders)
         {
             Transform enemyTransform = enemyCollider.transform;
-            Debug.Log("Detected enemy at position: " + enemyTransform.position);
+            //Debug.Log("Detected enemy at position: " + enemyTransform.position);
 
             Target = enemyTransform;
             dist = Vector3.Distance(transform.position, Target.transform.position);
-            if (dist < checkRange)
+            if (dist <= checkRange)
             {
                 StartCoroutine(Shoot(Target.gameObject));
-                skin.LookAt(Target);
+
+                skin.LookAt(Target);  
                 transhoot.LookAt(Target);
             }
         }
