@@ -19,7 +19,6 @@ public class BulletController : MonoBehaviour
     {
         if(target == null)
         {
-            target = GameObject.FindGameObjectWithTag("Enemy");
             Destroy(gameObject);
         }
         if (!stopProjectile) 

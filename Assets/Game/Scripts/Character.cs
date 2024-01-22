@@ -37,9 +37,8 @@ public class Character : MonoBehaviour
         {
             Instantiate(bulletPrefab, transhoot.transform.position,Quaternion.identity); 
             bulletPrefab.GetComponent<BulletController>().target =  targetedEnemyObj;
+            Debug.Log(targetedEnemyObj.name);
             bulletPrefab.GetComponent<BulletController>().targetSet = true;
-            ChangeAnim("IsAttack");
-            Debug.Log("Check");
             currentAmmo -= 1;
             yield return new WaitForSeconds(2f);
             if (currentAmmo < maxAmmoSize)

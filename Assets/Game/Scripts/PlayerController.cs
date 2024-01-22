@@ -9,7 +9,7 @@ public class PlayerController : Character
 {
     public float dist;
     public float checkRange;
-    public Transform Target;
+    public Transform nearestEnemy;
     public LayerMask enemyLayer;
     public float detectionRange;
 
@@ -18,6 +18,7 @@ public class PlayerController : Character
     {
         Move();
         CheckForEnemies();
+
     }
 
 
@@ -47,19 +48,44 @@ public class PlayerController : Character
 
         foreach (Collider enemyCollider in hitColliders)
         {
-            Transform enemyTransform = enemyCollider.transform;
+            Transform  enemyTransform = enemyCollider.transform;
             //Debug.Log("Detected enemy at position: " + enemyTransform.position);
 
-            Target = enemyTransform;
-            dist = Vector3.Distance(transform.position, Target.transform.position);
-            if (dist <= checkRange)
+            nearestEnemy = FindNearestEnemy();
+            dist = Vector3.Distance(transform.position, nearestEnemy.transform.position);
+            if (nearestEnemy != null && dist < checkRange)
             {
-                StartCoroutine(Shoot(Target.gameObject));
-
-                skin.LookAt(Target);  
-                transhoot.LookAt(Target);
+                ChangeAnim("IsAttack");
+                StartCoroutine(Shoot(nearestEnemy.gameObject));
+                skin.LookAt(nearestEnemy);  
+                transhoot.LookAt(nearestEnemy);
+            }
+            else
+            {
+                return;
             }
         }
+    }
+    Transform FindNearestEnemy()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange, enemyLayer);
+
+        Transform nearestEnemy = null;
+        float closestDistanceSqr = Mathf.Infinity;
+        Vector3 currentPosition = transform.position;
+
+        foreach (Collider collider in colliders)
+        {
+            Vector3 directionToEnemy = collider.transform.position - currentPosition;
+            float sqrDistanceToEnemy = directionToEnemy.sqrMagnitude;
+
+            if (sqrDistanceToEnemy < closestDistanceSqr)
+            {
+                closestDistanceSqr = sqrDistanceToEnemy;
+                nearestEnemy = collider.transform;
+            }
+        }
+        return nearestEnemy;
     }
 
     public Vector3 CheckGround(Vector3 nextPoint)
