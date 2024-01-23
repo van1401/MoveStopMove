@@ -163,7 +163,7 @@ MonoBehaviour:
   skin: {fileID: 27953702}
   transhoot: {fileID: 391528513}
   dist: 0
-  checkRange: 6
+  checkRange: 5.7
   nearestEnemy: {fileID: 0}
   enemyLayer:
     serializedVersion: 2
@@ -344,6 +344,33 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fee67d62b89fc1d4db9af81d7640871e, type: 3}
   m_PrefabInstance: {fileID: 49885930}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &81292729 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8124260238107277728, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
+  m_PrefabInstance: {fileID: 158518818}
+  m_PrefabAsset: {fileID: 0}
+--- !u!195 &81292735
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81292729}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &91449914
 GameObject:
   m_ObjectHideFlags: 0
@@ -574,13 +601,24 @@ PrefabInstance:
       value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
+      propertyPath: wanderTimer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
       propertyPath: bulletPrefab
       value: 
       objectReference: {fileID: 6736121647075960377, guid: 7cebb0d49e163f049ad1225c6d32a351, type: 3}
+    - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
+      propertyPath: wanderRadius
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8124260238107277728, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 81292735}
   m_SourcePrefab: {fileID: 100100000, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
 --- !u!1 &279008727
 GameObject:
@@ -613,6 +651,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &327529059 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8124260238107277728, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
+  m_PrefabInstance: {fileID: 1019571407}
+  m_PrefabAsset: {fileID: 0}
+--- !u!195 &327529065
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327529059}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &391528512
 GameObject:
   m_ObjectHideFlags: 0
@@ -892,13 +957,24 @@ PrefabInstance:
       value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
+      propertyPath: wanderTimer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
       propertyPath: bulletPrefab
       value: 
       objectReference: {fileID: 6736121647075960377, guid: 7cebb0d49e163f049ad1225c6d32a351, type: 3}
+    - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
+      propertyPath: wanderRadius
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8124260238107277728, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1275121593}
   m_SourcePrefab: {fileID: 100100000, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
 --- !u!1001 &643661740
 PrefabInstance:
@@ -973,13 +1049,24 @@ PrefabInstance:
       value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
+      propertyPath: wanderTimer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
       propertyPath: bulletPrefab
       value: 
       objectReference: {fileID: 6736121647075960377, guid: 7cebb0d49e163f049ad1225c6d32a351, type: 3}
+    - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
+      propertyPath: wanderRadius
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8124260238107277728, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1832358125}
   m_SourcePrefab: {fileID: 100100000, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
 --- !u!1 &705507993
 GameObject:
@@ -1178,6 +1265,33 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fee67d62b89fc1d4db9af81d7640871e, type: 3}
   m_PrefabInstance: {fileID: 788780900}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &899232152 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8124260238107277728, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
+  m_PrefabInstance: {fileID: 1342453200}
+  m_PrefabAsset: {fileID: 0}
+--- !u!195 &899232158
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899232152}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1397,13 +1511,24 @@ PrefabInstance:
       value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
+      propertyPath: wanderTimer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
       propertyPath: bulletPrefab
       value: 
       objectReference: {fileID: 6736121647075960377, guid: 7cebb0d49e163f049ad1225c6d32a351, type: 3}
+    - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
+      propertyPath: wanderRadius
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8124260238107277728, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 327529065}
   m_SourcePrefab: {fileID: 100100000, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
 --- !u!1001 &1024488819
 PrefabInstance:
@@ -2239,10 +2364,9 @@ GameObject:
   - component: {fileID: 1184038814}
   - component: {fileID: 1184038813}
   - component: {fileID: 1184038815}
-  - component: {fileID: 1184038816}
   m_Layer: 0
   m_Name: RangedAttack
-  m_TagString: Untagged
+  m_TagString: RangedAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2335,18 +2459,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1184038816
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1184038812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a74213efcc4be445b882ab9fa2da5b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1194366987
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2420,14 +2532,79 @@ PrefabInstance:
       value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
+      propertyPath: wanderTimer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
       propertyPath: bulletPrefab
       value: 
       objectReference: {fileID: 6736121647075960377, guid: 7cebb0d49e163f049ad1225c6d32a351, type: 3}
+    - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
+      propertyPath: wanderRadius
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8124260238107277728, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2066025950}
   m_SourcePrefab: {fileID: 100100000, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
+--- !u!1 &1225802441 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8124260238107277728, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
+  m_PrefabInstance: {fileID: 8714737591244368814}
+  m_PrefabAsset: {fileID: 0}
+--- !u!195 &1225802447
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1225802441}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!1 &1275121587 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8124260238107277728, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
+  m_PrefabInstance: {fileID: 501848542}
+  m_PrefabAsset: {fileID: 0}
+--- !u!195 &1275121593
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1275121587}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &1305791480
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2604,13 +2781,24 @@ PrefabInstance:
       value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
+      propertyPath: wanderTimer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
       propertyPath: bulletPrefab
       value: 
       objectReference: {fileID: 6736121647075960377, guid: 7cebb0d49e163f049ad1225c6d32a351, type: 3}
+    - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
+      propertyPath: wanderRadius
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8124260238107277728, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 899232158}
   m_SourcePrefab: {fileID: 100100000, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
 --- !u!1001 &1395624990
 PrefabInstance:
@@ -2790,13 +2978,24 @@ PrefabInstance:
       value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
+      propertyPath: wanderTimer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
       propertyPath: bulletPrefab
       value: 
       objectReference: {fileID: 6736121647075960377, guid: 7cebb0d49e163f049ad1225c6d32a351, type: 3}
+    - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
+      propertyPath: wanderRadius
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8124260238107277728, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1817520444}
   m_SourcePrefab: {fileID: 100100000, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
 --- !u!1 &1545218658 stripped
 GameObject:
@@ -2860,6 +3059,60 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 20b92be7b36d6e8478c9312e060aca81, type: 3}
   m_PrefabInstance: {fileID: 1112213251}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1817520438 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8124260238107277728, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
+  m_PrefabInstance: {fileID: 1487686929}
+  m_PrefabAsset: {fileID: 0}
+--- !u!195 &1817520444
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817520438}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!1 &1832358119 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8124260238107277728, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
+  m_PrefabInstance: {fileID: 643661740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!195 &1832358125
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832358119}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &1901115890
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3069,6 +3322,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2066025944 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8124260238107277728, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
+  m_PrefabInstance: {fileID: 1194366987}
+  m_PrefabAsset: {fileID: 0}
+--- !u!195 &2066025950
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2066025944}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &8714737591244368814
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3146,13 +3426,24 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
+      propertyPath: wanderTimer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
       propertyPath: bulletPrefab
       value: 
       objectReference: {fileID: 6736121647075960377, guid: 7cebb0d49e163f049ad1225c6d32a351, type: 3}
+    - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
+      propertyPath: wanderRadius
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8124260238107277728, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1225802447}
   m_SourcePrefab: {fileID: 100100000, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

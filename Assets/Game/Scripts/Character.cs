@@ -7,7 +7,6 @@ using static UnityEngine.GraphicsBuffer;
 public class Character : MonoBehaviour
 {
     public Animator anim;
-    private string currentAnim;
     public GameObject bulletPrefab;
     public int currentAmmo, maxAmmoSize = 1;
     public int hp = 1;
@@ -16,6 +15,7 @@ public class Character : MonoBehaviour
     public Rigidbody rb;
     public Transform skin;
     public Transform transhoot;
+    private string currentAnim;
     protected bool isShooting = false;
     
     public void ChangeAnim(string animName)
@@ -35,13 +35,11 @@ public class Character : MonoBehaviour
     {
         if (currentAmmo == maxAmmoSize)
         {
-            ChangeAnim("IsAttack");
             Instantiate(bulletPrefab, transhoot.transform.position,Quaternion.identity); 
             bulletPrefab.GetComponent<BulletController>().target =  targetedEnemyObj;
-            Debug.Log(targetedEnemyObj.name);
             bulletPrefab.GetComponent<BulletController>().targetSet = true;
             currentAmmo -= 1;
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
             if (currentAmmo < maxAmmoSize)
             {
                 currentAmmo += 1;

@@ -8,38 +8,27 @@ public class BulletController : MonoBehaviour
     public int speed;
     public Transform target;
     public bool targetSet;
-    public bool stopProjectile;
     private float velocity = 5;
     public float turnSpeed;
-    
-    
 
     void Update()
     {
-        if(target == null)
+        if (target == null)
         {
-            Destroy(gameObject);
-            target = PlayerController.Instance.nearestEnemy.transform;
-        }
-        if (!stopProjectile) 
-        {
-            if(Vector3.Distance(transform.position, target.transform.position) < 0.5f)
-            {
-                stopProjectile = true;
-                Destroy(gameObject);
-            }    
+           Destroy(gameObject);
         }
         Move();
     }
 
     void Move()
     {
-          transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z), velocity * Time.deltaTime);
-          transform.Rotate(0, 10, 0 * turnSpeed * Time.deltaTime);
+        target = PlayerController.Instance.nearestEnemy.transform;
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z), velocity * Time.deltaTime);
+        transform.Rotate(0, 10, 0 * turnSpeed * Time.deltaTime);
     }
-    private void OnTriggerEnter(Collider collision)
+    private void OnTriggerExit(Collider collision)
     {
-        if (collision.transform.gameObject.CompareTag("Enemy"))
+        if (collision.transform.gameObject.CompareTag("RangedAttack"))
         {
            Destroy(this.gameObject);
         }

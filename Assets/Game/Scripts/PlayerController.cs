@@ -25,9 +25,12 @@ public class PlayerController : Character
 
     void Update()
     {
+        if(!isShooting)
+        {
+        }
         Move();
-        CheckForEnemies();
 
+        CheckDistance();
     }
 
 
@@ -43,35 +46,25 @@ public class PlayerController : Character
                 ChangeAnim("Run");
             }
         }
-        else
-        {
-            ChangeAnim("IsIdle");
-        }
+        else{ChangeAnim("IsIdle");}
     }   
-
-
     
-    void CheckForEnemies()
+    void CheckDistance()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, detectionRange, enemyLayer);
-
-        foreach (Collider enemyCollider in hitColliders)
+        nearestEnemy = FindNearestEnemy();
+        dist = Vector3.Distance(transform.position, nearestEnemy.transform.position);
+        if (nearestEnemy != null && dist < checkRange)
         {
-            Transform  enemyTransform = enemyCollider.transform;
-            //Debug.Log("Detected enemy at position: " + enemyTransform.position);
-
-            nearestEnemy = FindNearestEnemy();
-            dist = Vector3.Distance(transform.position, nearestEnemy.transform.position);
-            if (nearestEnemy != null && dist < checkRange)
-            {
-                StartCoroutine(Shoot(nearestEnemy));
-                skin.LookAt(nearestEnemy);  
-                transhoot.LookAt(nearestEnemy);
-            }
-            else
-            {
-                return;
-            }
+            isShooting = true;  
+            ChangeAnim("IsAttack");
+            StartCoroutine(Shoot(nearestEnemy));
+            skin.LookAt(nearestEnemy);
+            transhoot.LookAt(nearestEnemy);
+        }
+        else 
+        { 
+            isShooting = false;
+            return; 
         }
     }
     Transform FindNearestEnemy()
