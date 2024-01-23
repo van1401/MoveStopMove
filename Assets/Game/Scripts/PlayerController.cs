@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.UI;
-using static Unity.VisualScripting.Dependencies.Sqlite.SQLite3;
+using Sirenix.OdinInspector;
+
 
 public class PlayerController : Character
 {
@@ -12,6 +11,16 @@ public class PlayerController : Character
     public Transform nearestEnemy;
     public LayerMask enemyLayer;
     public float detectionRange;
+    public static PlayerController Instance;
+
+
+    private void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }    
+    }
 
 
     void Update()
@@ -55,8 +64,7 @@ public class PlayerController : Character
             dist = Vector3.Distance(transform.position, nearestEnemy.transform.position);
             if (nearestEnemy != null && dist < checkRange)
             {
-                ChangeAnim("IsAttack");
-                StartCoroutine(Shoot(nearestEnemy.gameObject));
+                StartCoroutine(Shoot(nearestEnemy));
                 skin.LookAt(nearestEnemy);  
                 transhoot.LookAt(nearestEnemy);
             }

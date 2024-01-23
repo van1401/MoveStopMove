@@ -69,6 +69,13 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.mathematics": {
+      "version": "https://github.com/needle-mirror/com.unity.mathematics.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "af422ba57a6e2b9818a3354b328d712e45dd3d93"
+    },
     "com.unity.performance.profile-analyzer": {
       "version": "1.2.2",
       "depth": 1,

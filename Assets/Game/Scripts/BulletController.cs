@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class BulletController : MonoBehaviour
 {
     public int speed;
-    public GameObject target;
+    public Transform target;
     public bool targetSet;
     public bool stopProjectile;
     private float velocity = 5;
@@ -20,6 +19,7 @@ public class BulletController : MonoBehaviour
         if(target == null)
         {
             Destroy(gameObject);
+            target = PlayerController.Instance.nearestEnemy.transform;
         }
         if (!stopProjectile) 
         {

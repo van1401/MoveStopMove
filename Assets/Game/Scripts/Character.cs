@@ -31,10 +31,11 @@ public class Character : MonoBehaviour
         }
     }
 
-    protected IEnumerator Shoot(GameObject targetedEnemyObj)
+    protected IEnumerator Shoot(Transform targetedEnemyObj)
     {
         if (currentAmmo == maxAmmoSize)
         {
+            ChangeAnim("IsAttack");
             Instantiate(bulletPrefab, transhoot.transform.position,Quaternion.identity); 
             bulletPrefab.GetComponent<BulletController>().target =  targetedEnemyObj;
             Debug.Log(targetedEnemyObj.name);
