@@ -602,7 +602,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
       propertyPath: wanderTimer
-      value: 8
+      value: 6.5
       objectReference: {fileID: 0}
     - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
       propertyPath: bulletPrefab
@@ -610,7 +610,7 @@ PrefabInstance:
       objectReference: {fileID: 6736121647075960377, guid: 7cebb0d49e163f049ad1225c6d32a351, type: 3}
     - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
       propertyPath: wanderRadius
-      value: 30
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -958,7 +958,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
       propertyPath: wanderTimer
-      value: 8
+      value: 6.5
       objectReference: {fileID: 0}
     - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
       propertyPath: bulletPrefab
@@ -966,7 +966,7 @@ PrefabInstance:
       objectReference: {fileID: 6736121647075960377, guid: 7cebb0d49e163f049ad1225c6d32a351, type: 3}
     - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
       propertyPath: wanderRadius
-      value: 30
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1050,7 +1050,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
       propertyPath: wanderTimer
-      value: 8
+      value: 6.5
       objectReference: {fileID: 0}
     - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
       propertyPath: bulletPrefab
@@ -1058,7 +1058,7 @@ PrefabInstance:
       objectReference: {fileID: 6736121647075960377, guid: 7cebb0d49e163f049ad1225c6d32a351, type: 3}
     - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
       propertyPath: wanderRadius
-      value: 30
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1512,7 +1512,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
       propertyPath: wanderTimer
-      value: 8
+      value: 6.5
       objectReference: {fileID: 0}
     - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
       propertyPath: bulletPrefab
@@ -1520,7 +1520,7 @@ PrefabInstance:
       objectReference: {fileID: 6736121647075960377, guid: 7cebb0d49e163f049ad1225c6d32a351, type: 3}
     - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
       propertyPath: wanderRadius
-      value: 30
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2533,7 +2533,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
       propertyPath: wanderTimer
-      value: 8
+      value: 6.5
       objectReference: {fileID: 0}
     - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
       propertyPath: bulletPrefab
@@ -2541,7 +2541,7 @@ PrefabInstance:
       objectReference: {fileID: 6736121647075960377, guid: 7cebb0d49e163f049ad1225c6d32a351, type: 3}
     - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
       propertyPath: wanderRadius
-      value: 30
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2782,7 +2782,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
       propertyPath: wanderTimer
-      value: 8
+      value: 6.5
       objectReference: {fileID: 0}
     - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
       propertyPath: bulletPrefab
@@ -2790,7 +2790,7 @@ PrefabInstance:
       objectReference: {fileID: 6736121647075960377, guid: 7cebb0d49e163f049ad1225c6d32a351, type: 3}
     - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
       propertyPath: wanderRadius
-      value: 30
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2979,7 +2979,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
       propertyPath: wanderTimer
-      value: 8
+      value: 6.5
       objectReference: {fileID: 0}
     - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
       propertyPath: bulletPrefab
@@ -2987,7 +2987,7 @@ PrefabInstance:
       objectReference: {fileID: 6736121647075960377, guid: 7cebb0d49e163f049ad1225c6d32a351, type: 3}
     - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
       propertyPath: wanderRadius
-      value: 30
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3427,7 +3427,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
       propertyPath: wanderTimer
-      value: 8
+      value: 6.5
       objectReference: {fileID: 0}
     - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
       propertyPath: bulletPrefab
@@ -3435,7 +3435,7 @@ PrefabInstance:
       objectReference: {fileID: 6736121647075960377, guid: 7cebb0d49e163f049ad1225c6d32a351, type: 3}
     - target: {fileID: 8801591723413030496, guid: 2d70ba769d651164dad0ad74e28a4b68, type: 3}
       propertyPath: wanderRadius
-      value: 30
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

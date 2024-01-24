@@ -46,10 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebcbeaba6e8ad3b4abe878aa548fcf1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 1
   target: {fileID: 0}
   targetSet: 1
-  turnSpeed: 50
+  turnSpeed: 10
 --- !u!65 &5804593006114321570
 BoxCollider:
   m_ObjectHideFlags: 0
