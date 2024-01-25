@@ -372,6 +372,10 @@ PrefabInstance:
       value: Bot
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -767,6 +771,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8801591723413030496}
+    - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -520197046710176609}
   m_SourcePrefab: {fileID: 100100000, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
 --- !u!95 &2913391066368747209 stripped
 Animator:
@@ -846,14 +853,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 2913391066368747209}
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 6736121647075960377, guid: 7cebb0d49e163f049ad1225c6d32a351, type: 3}
   currentAmmo: 1
   maxAmmoSize: 1
   hp: 1
   speed: 5
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
   rb: {fileID: 297110449974048408}
   skin: {fileID: 5108333756874230707}
   transhoot: {fileID: 1511626718265894246}
+  nearestEnemy: {fileID: 0}
+  lastEnemyPosition: {x: 0, y: 0, z: 0}
+  checkRange: 0
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  detectionRange: 1000
+  wanderRadius: 20
+  wanderTimer: 6.5
+--- !u!195 &-520197046710176609
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8124260238107277728}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4

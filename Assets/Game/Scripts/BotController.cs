@@ -50,7 +50,6 @@ public class BotController : Character
             hp -= 1;
             if (hp <= 0 )
             {
-                this.PostEvent(EventID.EnemyKill);
                 Destroy(this.gameObject); 
             }
         }    
