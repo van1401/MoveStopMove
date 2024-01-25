@@ -37,15 +37,15 @@ public class Character : MonoBehaviour
         }
     }
 
-    protected IEnumerator Shoot(Transform targetedEnemyObj)
+    protected IEnumerator Shoot(Vector3 targetedEnemyObj)
     {
-        if (currentAmmo == maxAmmoSize)
+        if (currentAmmo == maxAmmoSize && rb.velocity == Vector3.zero)
         {
             Instantiate(bulletPrefab, transhoot.transform.position,Quaternion.identity); 
             bulletPrefab.GetComponent<BulletController>().target =  targetedEnemyObj;
             bulletPrefab.GetComponent<BulletController>().targetSet = true;
             currentAmmo -= 1;
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(2f);
             if (currentAmmo < maxAmmoSize)
             {
                 currentAmmo += 1;
@@ -58,11 +58,12 @@ public class Character : MonoBehaviour
         dist = Vector3.Distance(transform.position, nearestEnemy.transform.position);
         if (nearestEnemy != null && dist < checkRange)
         {
+            lastEnemyPosition = nearestEnemy.transform.position;
             isShooting = true;
             ChangeAnim("IsAttack");
-            StartCoroutine(Shoot(nearestEnemy));
-            skin.LookAt(nearestEnemy);
-            transhoot.LookAt(nearestEnemy);
+            StartCoroutine(Shoot(lastEnemyPosition));
+            skin.LookAt(lastEnemyPosition);
+            transhoot.LookAt(lastEnemyPosition);
         }
         else
         {

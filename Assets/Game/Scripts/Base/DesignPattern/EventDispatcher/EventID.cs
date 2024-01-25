@@ -1,11 +1,9 @@
 public enum EventID
 {
+    LevelUp,
     EarnGold,
     EatFood,
-    EnemyDie,
-    PlayerDie,
     WasEat,
-    LevelUp,
     EatItem,
     RespawnEnemy,
     ShieldHit,

@@ -20,10 +20,7 @@ public class PlayerController : Character
 
     void Update()
     {
-        if(nearestEnemy != null)
-        {
-            lastEnemyPosition = nearestEnemy.transform.position;
-        }
+
 
         if (!isShooting)
         {
