@@ -19,7 +19,7 @@ public class BulletController : MonoBehaviour
         }
         if (Vector3.Distance(transform.position, new Vector3(target.x, transform.position.y, target.z)) < 0.3f)
         {
-
+            Debug.Log("Checktransform");
             Destroy(this.gameObject);
         }
         Move();

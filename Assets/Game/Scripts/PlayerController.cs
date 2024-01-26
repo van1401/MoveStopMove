@@ -46,8 +46,6 @@ public class PlayerController : Character
         else { ChangeAnim("IsIdle"); }
     }
 
-
-
     public Vector3 CheckGround(Vector3 nextPoint)
     {
         RaycastHit hit;

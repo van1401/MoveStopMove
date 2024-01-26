@@ -10,19 +10,14 @@ public class Character : MonoBehaviour
 {
     public Animator anim;
     public GameObject bulletPrefab;
-    public int currentAmmo, maxAmmoSize = 1;
-    public int hp = 1;
-    public float speed;
+    public int currentAmmo = 1, maxAmmoSize = 1, hp = 1;
+    public float speed, checkRange, detectionRange = 1000, searchInterval = 3f;
+    protected float dist, lastSearchTime = Mathf.NegativeInfinity;
     public Rigidbody rb;
-    public Transform skin;
-    public Transform transhoot;
-    public Transform nearestEnemy;
+    public Transform skin, transhoot, nearestEnemy;
     public Vector3 lastEnemyPosition;
     private string currentAnim;
-    protected float dist;
-    public float checkRange;
     public LayerMask groundLayer, enemyLayer;
-    public float detectionRange;
     protected bool isShooting = false;
 
     public void ChangeAnim(string animName)
@@ -56,14 +51,14 @@ public class Character : MonoBehaviour
         }
     }
 
-    protected void scaleUp()
-    {
-        transform.localScale = (transform.localScale + (transform.localScale * 0.05f));
-        checkRange += 0.1f;
-    }
     protected void CheckDistance()
     {
         nearestEnemy = FindNearestEnemy();
+        if (Time.time - lastSearchTime >= searchInterval)
+        {
+            nearestEnemy = FindNearestEnemy();
+            lastSearchTime = Time.time;
+        }
         if (nearestEnemy == null)
         {
             return;
@@ -81,10 +76,16 @@ public class Character : MonoBehaviour
         else
         {
             isShooting = false;
-            return;
         }
     }
-    Transform FindNearestEnemy()
+
+    protected void scaleUp()
+    {
+        transform.localScale = (transform.localScale + (transform.localScale * 0.05f));
+        checkRange += 0.1f;
+    }
+
+    protected Transform FindNearestEnemy()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange, enemyLayer);
 
