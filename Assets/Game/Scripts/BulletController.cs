@@ -29,7 +29,6 @@ public class BulletController : MonoBehaviour
 
     void Move() 
     {
-        //target = PlayerController.Instance.lastEnemyPosition; 
         transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.x, transform.position.y, target.z), velocity * Time.deltaTime);
         transform.Rotate(0, 10, 0 * turnSpeed * Time.deltaTime);      
     }

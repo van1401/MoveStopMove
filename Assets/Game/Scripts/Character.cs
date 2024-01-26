@@ -68,8 +68,8 @@ public class Character : MonoBehaviour
         if (nearestEnemy != null && dist < checkRange)
         {
             isShooting = true;
-            StartCoroutine(Shoot(nearestEnemy.transform.position));
             ChangeAnim("IsAttack");
+            StartCoroutine(Shoot(nearestEnemy.transform.position));
             skin.LookAt(nearestEnemy.transform.position);
             transhoot.LookAt(nearestEnemy.transform.position);
         }
