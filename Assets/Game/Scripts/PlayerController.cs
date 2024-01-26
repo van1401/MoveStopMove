@@ -11,17 +11,18 @@ public class PlayerController : Character
 
     private void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
-        }    
+        }
+        this.RegisterListener(EventID.EnemyKill, (sender, param) =>
+        {
+            scaleUp();
+        });
     }
-
 
     void Update()
     {
-
-
         if (!isShooting)
         {
             Move();
@@ -42,10 +43,10 @@ public class PlayerController : Character
                 ChangeAnim("Run");
             }
         }
-        else{ChangeAnim("IsIdle");}
-    }   
-    
-  
+        else { ChangeAnim("IsIdle"); }
+    }
+
+
 
     public Vector3 CheckGround(Vector3 nextPoint)
     {

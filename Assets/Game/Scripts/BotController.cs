@@ -1,3 +1,4 @@
+using Core.Pool;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,10 +8,17 @@ public class BotController : Character
 {
     public float wanderRadius;
     public float wanderTimer;
-
     private NavMeshAgent agent;
     private float timer;
-  
+    public static BotController Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
 
     private void OnEnable()
     {
@@ -50,7 +58,8 @@ public class BotController : Character
             hp -= 1;
             if (hp <= 0 )
             {
-                Destroy(this.gameObject); 
+                SmartPool.Instance.Despawn(this.gameObject);
+                this.PostEvent(EventID.EnemyKill);
             }
         }    
     }

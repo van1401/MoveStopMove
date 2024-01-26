@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using static UnityEngine.GraphicsBuffer;
+using Core.Pool;
 
 public class Character : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class Character : MonoBehaviour
     public LayerMask groundLayer, enemyLayer;
     public float detectionRange;
     protected bool isShooting = false;
-    
+
     public void ChangeAnim(string animName)
     {
         if (currentAnim != animName)
@@ -41,8 +42,10 @@ public class Character : MonoBehaviour
     {
         if (currentAmmo == maxAmmoSize && rb.velocity == Vector3.zero)
         {
-            Instantiate(bulletPrefab, transhoot.transform.position,Quaternion.identity); 
-            bulletPrefab.GetComponent<BulletController>().target =  targetedEnemyObj;
+            //Instantiate(bulletPrefab, transhoot.transform.position,Quaternion.identity); 
+            SmartPool.Instance.Spawn(bulletPrefab, transhoot.transform.position, Quaternion.identity);
+            Debug.Log("Shooting");
+            bulletPrefab.GetComponent<BulletController>().target = targetedEnemyObj;
             bulletPrefab.GetComponent<BulletController>().targetSet = true;
             currentAmmo -= 1;
             yield return new WaitForSeconds(2f);
@@ -52,16 +55,26 @@ public class Character : MonoBehaviour
             }
         }
     }
+
+    protected void scaleUp()
+    {
+        transform.localScale = (transform.localScale + (transform.localScale * 0.05f));
+        checkRange += 0.1f;
+    }
     protected void CheckDistance()
     {
         nearestEnemy = FindNearestEnemy();
+        if (nearestEnemy == null)
+        {
+            return;
+        }
         dist = Vector3.Distance(transform.position, nearestEnemy.transform.position);
         if (nearestEnemy != null && dist < checkRange)
         {
             lastEnemyPosition = nearestEnemy.transform.position;
             isShooting = true;
-            ChangeAnim("IsAttack");
             StartCoroutine(Shoot(lastEnemyPosition));
+            ChangeAnim("IsAttack");
             skin.LookAt(lastEnemyPosition);
             transhoot.LookAt(lastEnemyPosition);
         }
@@ -93,3 +106,4 @@ public class Character : MonoBehaviour
         return nearestEnemy;
     }
 }
+
