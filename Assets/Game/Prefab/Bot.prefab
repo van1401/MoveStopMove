@@ -858,7 +858,7 @@ MonoBehaviour:
   maxAmmoSize: 1
   hp: 1
   speed: 5
-  checkRange: 0
+  checkRange: 5.7
   detectionRange: 1000
   searchInterval: 3
   rb: {fileID: 297110449974048408}
