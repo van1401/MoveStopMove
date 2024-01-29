@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Core.Pool;
 
 public class BulletController : MonoBehaviour
 {
@@ -15,12 +16,15 @@ public class BulletController : MonoBehaviour
     {
         if (target == null)
         {
-           Destroy(gameObject);
+            Destroy(gameObject);
+            //SmartPool.Instance.Despawn(gameObject);
         }
         if (Vector3.Distance(transform.position, new Vector3(target.x, transform.position.y, target.z)) < 0.3f)
         {
             Debug.Log("Checktransform");
-            Destroy(this.gameObject);
+            //SmartPool.Instance.Despawn(gameObject);
+            Destroy(gameObject);
+
         }
         Move();
 
@@ -37,7 +41,8 @@ public class BulletController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("RangedAttack"))
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
+            //SmartPool.Instance.Despawn(gameObject);
         }
     }
 }
