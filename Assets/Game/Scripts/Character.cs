@@ -57,7 +57,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    protected void CheckDistance()
+    protected virtual void CheckDistance()
     {
         nearestEnemy = FindNearestEnemy();
         if (nearestEnemy == null)
@@ -85,7 +85,7 @@ public class Character : MonoBehaviour
         checkRange += 0.1f;
     }
 
-    protected Transform FindNearestEnemy()
+    protected virtual Transform FindNearestEnemy()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange, enemyLayer);
 

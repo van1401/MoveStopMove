@@ -119,7 +119,6 @@ public class BotController : Character
         dist = Vector3.Distance(transform.position, nearestEnemy.transform.position);
         if (nearestEnemy != null && dist < checkRange)
         {
-            lastEnemyPosition = nearestEnemy.transform.position;
             isShooting = true;
             //StartCoroutine(Shoot(lastEnemyPosition));
             //ChangeAnim("IsAttack");
