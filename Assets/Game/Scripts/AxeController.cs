@@ -1,10 +1,10 @@
-using Core.Pool;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class BulletController : MonoBehaviour
+public class AxeController : MonoBehaviour
+
 {
     public int speed;
     public Vector3 target;
@@ -21,14 +21,14 @@ public class BulletController : MonoBehaviour
         if (Vector3.Distance(transform.position, new Vector3(target.x, transform.position.y, target.z)) < 0.3f)
         {
             Debug.Log("Checktransform");
-            SmartPool.Instance.Despawn(gameObject);
+            Destroy(this.gameObject);
         }
-        Move();
-
+        Move();       
     }
 
-    void Move() 
+    void Move()
     {
+        target = PlayerController.Instance.lastEnemyPosition;
         transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.x, transform.position.y, target.z), velocity * Time.deltaTime);
         transform.Rotate(0, 10, 0 * turnSpeed * Time.deltaTime);      
     }
@@ -36,7 +36,7 @@ public class BulletController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("RangedAttack"))
         {
-            SmartPool.Instance.Despawn(gameObject);
+            Destroy(this.gameObject);
         }
     }
 }

@@ -859,7 +859,7 @@ MonoBehaviour:
   hp: 1
   speed: 5
   checkRange: 5.7
-  detectionRange: 1000
+  detectionRange: 500
   searchInterval: 3
   rb: {fileID: 297110449974048408}
   skin: {fileID: 5108333756874230707}
@@ -874,6 +874,10 @@ MonoBehaviour:
     m_Bits: 64
   wanderRadius: 20
   wanderTimer: 6.5
+  agent: {fileID: -520197046710176609}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!195 &-520197046710176609
 NavMeshAgent:
   m_ObjectHideFlags: 0
