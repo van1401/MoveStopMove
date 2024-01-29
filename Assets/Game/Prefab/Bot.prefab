@@ -377,7 +377,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
       propertyPath: m_TagString
-      value: Enemy
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: -681215969731513272, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -874,9 +874,6 @@ MonoBehaviour:
   wanderRadius: 20
   wanderTimer: 6.5
   agent: {fileID: -520197046710176609}
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 128
 --- !u!195 &-520197046710176609
 NavMeshAgent:
   m_ObjectHideFlags: 0

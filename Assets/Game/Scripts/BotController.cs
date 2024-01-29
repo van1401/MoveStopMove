@@ -9,7 +9,6 @@ public class BotController : Character
     public static BotController Instance;
     public float wanderRadius, wanderTimer;
     public NavMeshAgent agent;
-    public LayerMask playerLayer;
     private float timer;
 
 
@@ -34,7 +33,6 @@ public class BotController : Character
         {
             Move();
         }
-        CheckDistance();
     }
 
 
@@ -81,55 +79,5 @@ public class BotController : Character
 
         return navHit.position;
     }
-
-    protected override Transform FindNearestEnemy()
-    {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange, playerLayer);
-
-        Transform nearestEnemy = null;
-        float closestDistanceSqr = Mathf.Infinity;
-        Vector3 currentPosition = transform.position;
-
-        foreach (Collider collider in colliders)
-        {
-            Vector3 directionToEnemy = collider.transform.position - currentPosition;
-            float sqrDistanceToEnemy = directionToEnemy.sqrMagnitude;
-
-            if (sqrDistanceToEnemy < closestDistanceSqr)
-            {
-                closestDistanceSqr = sqrDistanceToEnemy;
-                nearestEnemy = collider.transform;
-            }
-        }
-        return nearestEnemy;
-    }
-
-    protected override void CheckDistance()
-    {
-        nearestEnemy = FindNearestEnemy();
-        if (Time.time - lastSearchTime >= searchInterval)
-        {
-            nearestEnemy = FindNearestEnemy();
-            lastSearchTime = Time.time;
-        }
-        if (nearestEnemy == null)
-        {
-            return;
-        }
-        dist = Vector3.Distance(transform.position, nearestEnemy.transform.position);
-        if (nearestEnemy != null && dist < checkRange)
-        {
-            isShooting = true;
-            //StartCoroutine(Shoot(lastEnemyPosition));
-            //ChangeAnim("IsAttack");
-            //skin.LookAt(lastEnemyPosition);
-            //transhoot.LookAt(lastEnemyPosition);
-        }
-        else
-        {
-            isShooting = false;
-        }
-    }
-
 }
 

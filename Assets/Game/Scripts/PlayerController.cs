@@ -56,4 +56,47 @@ public class PlayerController : Character
         }
         return transform.position;
     }
+    protected  void CheckDistance()
+    {
+        nearestEnemy = FindNearestEnemy();
+        if (nearestEnemy == null)
+        {
+            return;
+        }
+        dist = Vector3.Distance(transform.position, nearestEnemy.transform.position);
+        if (nearestEnemy != null && dist < checkRange)
+        {
+            isShooting = true;
+            ChangeAnim("IsAttack");
+            StartCoroutine(Shoot(nearestEnemy.transform.position));
+            skin.LookAt(nearestEnemy.transform.position);
+            transhoot.LookAt(nearestEnemy.transform.position);
+        }
+        else
+        {
+            isShooting = false;
+        }
+    }
+
+    protected Transform FindNearestEnemy()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange, enemyLayer);
+
+        Transform nearestEnemy = null;
+        float closestDistanceSqr = Mathf.Infinity;
+        Vector3 currentPosition = transform.position;
+
+        foreach (Collider collider in colliders)
+        {
+            Vector3 directionToEnemy = collider.transform.position - currentPosition;
+            float sqrDistanceToEnemy = directionToEnemy.sqrMagnitude;
+
+            if (sqrDistanceToEnemy < closestDistanceSqr)
+            {
+                closestDistanceSqr = sqrDistanceToEnemy;
+                nearestEnemy = collider.transform;
+            }
+        }
+        return nearestEnemy;
+    }
 }

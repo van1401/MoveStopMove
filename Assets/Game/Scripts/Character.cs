@@ -5,11 +5,12 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using static UnityEngine.GraphicsBuffer;
 using Core.Pool;
+using DG.Tweening;
 
 public class Character : MonoBehaviour
 {
     public Animator anim;
-    public GameObject bulletPrefab;
+    public GameObject bulletPrefab, model;
     public int currentAmmo = 1, maxAmmoSize = 1, hp = 1;
     public float speed, checkRange, detectionRange = 1000, searchInterval = 3f;
     protected float dist, lastSearchTime = Mathf.NegativeInfinity;
@@ -18,6 +19,7 @@ public class Character : MonoBehaviour
     private string currentAnim;
     public LayerMask groundLayer, enemyLayer;
     protected bool isShooting = false;
+  
 
     public void ChangeAnim(string animName)
     {
@@ -56,55 +58,12 @@ public class Character : MonoBehaviour
             }
         }
     }
-
-    protected virtual void CheckDistance()
-    {
-        nearestEnemy = FindNearestEnemy();
-        if (nearestEnemy == null)
-        {
-            return;
-        }
-        dist = Vector3.Distance(transform.position, nearestEnemy.transform.position);
-        if (nearestEnemy != null && dist < checkRange)
-        {
-            isShooting = true;
-            ChangeAnim("IsAttack");
-            StartCoroutine(Shoot(nearestEnemy.transform.position));
-            skin.LookAt(nearestEnemy.transform.position);
-            transhoot.LookAt(nearestEnemy.transform.position);
-        }
-        else
-        {
-            isShooting = false;
-        }
-    }
-
     protected void scaleUp()
     {
-        transform.localScale = (transform.localScale + (transform.localScale * 0.05f));
-        checkRange += 0.1f;
-    }
-
-    protected virtual Transform FindNearestEnemy()
-    {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange, enemyLayer);
-
-        Transform nearestEnemy = null;
-        float closestDistanceSqr = Mathf.Infinity;
-        Vector3 currentPosition = transform.position;
-
-        foreach (Collider collider in colliders)
-        {
-            Vector3 directionToEnemy = collider.transform.position - currentPosition;
-            float sqrDistanceToEnemy = directionToEnemy.sqrMagnitude;
-
-            if (sqrDistanceToEnemy < closestDistanceSqr)
-            {
-                closestDistanceSqr = sqrDistanceToEnemy;
-                nearestEnemy = collider.transform;
-            }
-        }
-        return nearestEnemy;
+        Vector3 orginalScale = model.transform.localScale;
+        Vector3 scaleSize = orginalScale + (orginalScale * 0.05f);
+        model.transform.DOScale(scaleSize, 1);
+        detectionRange += 100;
     }
 }
 

@@ -16,19 +16,14 @@ public class BulletController : MonoBehaviour
     {
         if (target == null)
         {
-            Destroy(gameObject);
-            //SmartPool.Instance.Despawn(gameObject);
+            SmartPool.Instance.Despawn(gameObject);
         }
         if (Vector3.Distance(transform.position, new Vector3(target.x, transform.position.y, target.z)) < 0.3f)
         {
             Debug.Log("Checktransform");
-            //SmartPool.Instance.Despawn(gameObject);
-            Destroy(gameObject);
-
+            SmartPool.Instance.Despawn(gameObject);
         }
-        Move();
-
-        
+        Move();        
     }
 
     void Move() 
@@ -40,8 +35,7 @@ public class BulletController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("RangedAttack"))
         {
-            Destroy(gameObject);
-            //SmartPool.Instance.Despawn(gameObject);
+            SmartPool.Instance.Despawn(gameObject);
         }
     }
 }
