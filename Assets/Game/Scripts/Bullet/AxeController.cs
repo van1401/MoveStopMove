@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class BulletController : MonoBehaviour
+public class AxeController : MonoBehaviour
+
 {
     public int speed;
     public Vector3 target;
@@ -22,8 +23,7 @@ public class BulletController : MonoBehaviour
             Debug.Log("Checktransform");
             Destroy(this.gameObject);
         }
-        Move();
-
+        Move();       
     }
 
     void Move()

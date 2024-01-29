@@ -5,6 +5,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using static UnityEngine.GraphicsBuffer;
 using Core.Pool;
+using DG.Tweening;
 
 public class Character : MonoBehaviour
 {
@@ -37,7 +38,6 @@ public class Character : MonoBehaviour
     {
         if (currentAmmo == maxAmmoSize && rb.velocity == Vector3.zero)
         {
-            //Instantiate(bulletPrefab, transhoot.transform.position,Quaternion.identity); 
             SmartPool.Instance.Spawn(bulletPrefab, transhoot.transform.position, Quaternion.identity);
             Debug.Log("Shooting");
             bulletPrefab.GetComponent<BulletController>().target = targetedEnemyObj;
@@ -51,7 +51,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    protected void CheckDistance()
+    protected virtual void CheckDistance()
     {
         nearestEnemy = FindNearestEnemy();
         if (Time.time - lastSearchTime >= searchInterval)
@@ -81,11 +81,13 @@ public class Character : MonoBehaviour
 
     protected void scaleUp()
     {
-        transform.localScale = (transform.localScale + (transform.localScale * 0.05f));
+        Vector3 orginalScale = transform.localScale;
+        Vector3 scaleSize = orginalScale + (orginalScale * 0.05f);
+        transform.DOScale(scaleSize, 1);
         checkRange += 0.1f;
     }
 
-    protected Transform FindNearestEnemy()
+    protected virtual Transform FindNearestEnemy()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange, enemyLayer);
 

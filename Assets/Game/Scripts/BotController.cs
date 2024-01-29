@@ -6,11 +6,12 @@ using UnityEngine.AI;
 
 public class BotController : Character
 {
-    public float wanderRadius;
-    public float wanderTimer;
-    private NavMeshAgent agent;
-    private float timer;
     public static BotController Instance;
+    public float wanderRadius, wanderTimer;
+    public NavMeshAgent agent;
+    public LayerMask playerLayer;
+    private float timer;
+
 
     private void Awake()
     {
@@ -29,25 +30,29 @@ public class BotController : Character
 
     void Update()
     {
-        timer += Time.deltaTime;
-        Move();
+        if (!isShooting)
+        {
+            Move();
+        }
+        CheckDistance();
     }
 
 
 
     void Move()
     {
+        timer += Time.deltaTime;
         if (timer >= wanderTimer)
-        {
+        {   
             Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, -1);
             agent.SetDestination(newPos);
-            ChangeAnim("Run");
             timer = 0;
         }
-        else
+        if (agent.velocity != Vector3.zero)
         {
-            ChangeAnim("IsIdle");
+            ChangeAnim("Run");
         }
+        else {ChangeAnim("IsIdle");}
     }    
 
 
@@ -76,4 +81,56 @@ public class BotController : Character
 
         return navHit.position;
     }
+
+    protected override Transform FindNearestEnemy()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange, playerLayer);
+
+        Transform nearestEnemy = null;
+        float closestDistanceSqr = Mathf.Infinity;
+        Vector3 currentPosition = transform.position;
+
+        foreach (Collider collider in colliders)
+        {
+            Vector3 directionToEnemy = collider.transform.position - currentPosition;
+            float sqrDistanceToEnemy = directionToEnemy.sqrMagnitude;
+
+            if (sqrDistanceToEnemy < closestDistanceSqr)
+            {
+                closestDistanceSqr = sqrDistanceToEnemy;
+                nearestEnemy = collider.transform;
+            }
+        }
+        return nearestEnemy;
+    }
+
+    protected override void CheckDistance()
+    {
+        nearestEnemy = FindNearestEnemy();
+        if (Time.time - lastSearchTime >= searchInterval)
+        {
+            nearestEnemy = FindNearestEnemy();
+            lastSearchTime = Time.time;
+        }
+        if (nearestEnemy == null)
+        {
+            return;
+        }
+        dist = Vector3.Distance(transform.position, nearestEnemy.transform.position);
+        if (nearestEnemy != null && dist < checkRange)
+        {
+            lastEnemyPosition = nearestEnemy.transform.position;
+            isShooting = true;
+            //StartCoroutine(Shoot(lastEnemyPosition));
+            //ChangeAnim("IsAttack");
+            //skin.LookAt(lastEnemyPosition);
+            //transhoot.LookAt(lastEnemyPosition);
+        }
+        else
+        {
+            isShooting = false;
+        }
+    }
+
 }
+
