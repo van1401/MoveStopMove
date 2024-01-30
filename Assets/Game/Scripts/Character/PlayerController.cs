@@ -56,6 +56,7 @@ public class PlayerController : Character
         }
         return transform.position;
     }
+
     protected  void CheckDistance()
     {
         nearestEnemy = FindNearestEnemy();
@@ -66,6 +67,7 @@ public class PlayerController : Character
         dist = Vector3.Distance(transform.position, nearestEnemy.transform.position);
         if (nearestEnemy != null && dist < checkRange)
         {
+
             isShooting = true;
             ChangeAnim("IsAttack");
             StartCoroutine(Shoot(nearestEnemy.transform.position));
@@ -80,7 +82,7 @@ public class PlayerController : Character
 
     protected Transform FindNearestEnemy()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange, enemyLayer);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, checkingRadius, enemyLayer);
 
         Transform nearestEnemy = null;
         float closestDistanceSqr = Mathf.Infinity;
@@ -88,6 +90,11 @@ public class PlayerController : Character
 
         foreach (Collider collider in colliders)
         {
+            //if (collider.gameObject.CompareTag("Bot"))
+            //{
+
+            //}    
+
             Vector3 directionToEnemy = collider.transform.position - currentPosition;
             float sqrDistanceToEnemy = directionToEnemy.sqrMagnitude;
 

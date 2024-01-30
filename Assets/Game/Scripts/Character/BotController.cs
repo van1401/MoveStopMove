@@ -54,15 +54,16 @@ public class BotController : Character
     }    
 
 
-    private void OnTriggerEnter(Collider collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.transform.gameObject.CompareTag("Bullet"))
+        if(other.gameObject.CompareTag("Bullet"))
         {
             hp -= 1;
             if (hp <= 0 )
             {
-                SmartPool.Instance.Despawn(this.gameObject);
                 this.PostEvent(EventID.EnemyKill);
+                Debug.Log("Check destroy");
+                SmartPool.Instance.Despawn(gameObject);
             }
         }    
     }

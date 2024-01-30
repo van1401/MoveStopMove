@@ -20,8 +20,7 @@ public class BulletController : MonoBehaviour
         }
         if (Vector3.Distance(transform.position, new Vector3(target.x, transform.position.y, target.z)) < 0.3f)
         {
-            Debug.Log("Checktransform");
-            SmartPool.Instance.Despawn(gameObject);
+            SmartPool.Instance.Despawn(this.gameObject);
         }
         Move();        
     }
@@ -31,11 +30,11 @@ public class BulletController : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.x, transform.position.y, target.z), velocity * Time.deltaTime);
         transform.Rotate(0, 10, 0 * turnSpeed * Time.deltaTime);      
     }
-    private void OnTriggerExit(Collider collision)
+    private void OnTriggerExit(Collider other)
     {
-        if (collision.gameObject.CompareTag("RangedAttack"))
+        if (other.gameObject.CompareTag("RangedAttack"))
         {
-            SmartPool.Instance.Despawn(gameObject);
+            SmartPool.Instance.Despawn(this.gameObject);
         }
     }
 }

@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  target: {x: 7.4065194, y: 0.083333336, z: -12.211356}
+  target: {x: -7.0700293, y: 0.000575386, z: -28.781513}
   targetSet: 1
   turnSpeed: 10
 --- !u!65 &5804593006114321570

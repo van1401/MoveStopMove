@@ -10,13 +10,13 @@ using DG.Tweening;
 public class Character : MonoBehaviour
 {
     public Animator anim;
-    public GameObject bulletPrefab, model;
-    public int currentAmmo = 1, maxAmmoSize = 1, hp = 1;
-    public float speed, checkRange, detectionRange = 1000, searchInterval = 3f;
+    public GameObject bulletPrefab, model, detectionRange;
+    public float speed, checkRange, checkingRadius = 1000, searchInterval = 3f;
     protected float dist, lastSearchTime = Mathf.NegativeInfinity;
     public Rigidbody rb;
     public Transform skin, transhoot, nearestEnemy;
     private string currentAnim;
+    protected int currentAmmo = 1, hp = 1;
     public LayerMask groundLayer, enemyLayer;
     protected bool isShooting = false;
   
@@ -40,8 +40,8 @@ public class Character : MonoBehaviour
         {
             yield return null;
         }
-        
-        if (currentAmmo == maxAmmoSize)
+
+        else if (currentAmmo > 0 && targetedEnemyObj != Vector3.zero)
         {
             rb.velocity = Vector3.zero;
             targetedEnemyObj = nearestEnemy.transform.position;
@@ -52,7 +52,7 @@ public class Character : MonoBehaviour
             clone.gameObject.GetComponent<BulletController>().targetSet = true;
             currentAmmo -= 1;
             yield return new WaitForSeconds(1.5f);
-            if (currentAmmo < maxAmmoSize)
+            if (currentAmmo < 1)
             {
                 currentAmmo += 1;
             }
@@ -63,7 +63,6 @@ public class Character : MonoBehaviour
         Vector3 orginalScale = model.transform.localScale;
         Vector3 scaleSize = orginalScale + (orginalScale * 0.05f);
         model.transform.DOScale(scaleSize, 1);
-        detectionRange += 100;
     }
 }
 

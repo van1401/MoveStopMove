@@ -7,9 +7,9 @@ public class CameraController : MonoBehaviour
     public Transform playerTransform;
     [SerializeField] Vector3 offset;
 
-    private void Awake()
+    private void Start()
     {
-        if(playerTransform == null)
+        if (playerTransform == null)
         {
             playerTransform = PlayerController.Instance.transform;
         }
