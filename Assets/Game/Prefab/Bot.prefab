@@ -163,7 +163,7 @@ Transform:
   m_GameObject: {fileID: 3438439244978774199}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.4, y: 1, z: 17.7}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -198,7 +198,7 @@ Transform:
   m_GameObject: {fileID: 5690944936496457242}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.4, y: 0, z: -17.7}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -281,8 +281,6 @@ MonoBehaviour:
   skin: {fileID: 8004913227689994307}
   transhoot: {fileID: 1906498368183323412}
   nearestEnemy: {fileID: 0}
-  currentAmmo: 1
-  hp: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 8

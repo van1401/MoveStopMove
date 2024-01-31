@@ -32,9 +32,9 @@ public class BulletController : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("RangedAttack"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("DetectRange"))
         {
-            SmartPool.Instance.Despawn(this.gameObject);
+            SmartPool.Instance.Despawn(gameObject);
         }
     }
 }
