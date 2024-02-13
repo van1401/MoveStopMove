@@ -29,10 +29,7 @@ public class BotController : Character
 
     void Update()
     {
-        if (!isShooting)
-        {
-            Move();
-        }
+        Move(); 
         FindEnemyBot();
     }
 
@@ -51,7 +48,7 @@ public class BotController : Character
         {
             ChangeAnim("Run");
         }
-        else {ChangeAnim("IsIdle");}
+        else {ChangeAnim("Idle");}
     }    
 
 
@@ -98,15 +95,9 @@ public class BotController : Character
         dist = Vector3.Distance(transform.position, nearestEnemy.transform.position);
         if (nearestEnemy != null && dist < checkRange)
         {
-            isShooting = true;
-            ChangeAnim("IsAttack");
-            StartCoroutine(Shoot(nearestEnemy.transform.position));
+            //StartCoroutine(Shoot(nearestEnemy.transform.position));
             skin.LookAt(nearestEnemy.transform.position);
             transhoot.LookAt(nearestEnemy.transform.position);
-        }
-        else
-        {
-            isShooting = false;
         }
     }
 

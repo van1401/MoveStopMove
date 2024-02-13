@@ -10,7 +10,7 @@ using DG.Tweening;
 public class Character : MonoBehaviour
 {
     public Animator anim;
-    public GameObject bulletPrefab, model, detectionRange;
+    public GameObject bulletPrefab, model, detectionRange, weapon;
     public float speed, checkRange, checkingRadius = 1000, searchInterval = 3f;
     protected float dist, lastSearchTime = Mathf.NegativeInfinity;
     public Rigidbody rb;
@@ -18,7 +18,7 @@ public class Character : MonoBehaviour
     private string currentAnim;
     public int currentAmmo = 1, hp = 1;
     public LayerMask groundLayer, enemyLayer;
-    protected bool isShooting = false;
+    protected bool canAttack = true;
   
 
     public void ChangeAnim(string animName)
@@ -36,17 +36,14 @@ public class Character : MonoBehaviour
 
     protected IEnumerator Shoot(Vector3 targetedEnemyObj)
     {
-        if(targetedEnemyObj == Vector3.zero)
+        if (currentAmmo > 0 && targetedEnemyObj != Vector3.zero)
         {
-            yield return null;
-        }
-
-        else if (currentAmmo > 0 && targetedEnemyObj != Vector3.zero)
-        {
-            rb.velocity = Vector3.zero;
+            //rb.velocity = Vector3.zero;
             targetedEnemyObj = nearestEnemy.transform.position;
             bulletPrefab.GetComponent<BulletController>().target = targetedEnemyObj;
             bulletPrefab.GetComponent<BulletController>().targetSet = true;
+            ChangeAnim("Attack");
+            canAttack = false;
             var clone = SmartPool.Instance.Spawn(bulletPrefab, transhoot.transform.position, transform.rotation);
             clone.gameObject.GetComponent<BulletController>().target = targetedEnemyObj;
             clone.gameObject.GetComponent<BulletController>().targetSet = true;
@@ -58,6 +55,16 @@ public class Character : MonoBehaviour
             }
         }
     }
+
+
+    public void Throw()
+    {
+        weapon.SetActive(false);
+        StartCoroutine(Shoot(nearestEnemy.transform.position));
+    }
+
+
+
     protected void scaleUp()
     {
         Vector3 orginalScale = model.transform.localScale;
@@ -75,15 +82,9 @@ public class Character : MonoBehaviour
         dist = Vector3.Distance(transform.position, nearestEnemy.transform.position);
         if (nearestEnemy != null && dist < checkRange)
         {
-            isShooting = true;
-            ChangeAnim("IsAttack");
-            StartCoroutine(Shoot(nearestEnemy.transform.position));
+            Throw();
             skin.LookAt(nearestEnemy.transform.position);
             transhoot.LookAt(nearestEnemy.transform.position);
-        }
-        else
-        {
-            isShooting = false;
         }
     }
 
@@ -107,6 +108,13 @@ public class Character : MonoBehaviour
             }
         }
         return nearestEnemy;
+    }
+
+    public void ResetAttack()
+    {
+        weapon.SetActive(true);
+        ChangeAnim("Idle");
+        canAttack = true;
     }
 }
 

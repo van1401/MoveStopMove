@@ -163,7 +163,7 @@ Transform:
   m_GameObject: {fileID: 3438439244978774199}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -281,6 +281,8 @@ MonoBehaviour:
   skin: {fileID: 8004913227689994307}
   transhoot: {fileID: 1906498368183323412}
   nearestEnemy: {fileID: 0}
+  currentAmmo: 1
+  hp: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -323,7 +325,7 @@ PrefabInstance:
     - target: {fileID: -6057140222963153312, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: af2cf7787f062f4428a4e2c6abf049b2, type: 2}
+      objectReference: {fileID: 9100000, guid: 252414fe204b5454b8bd6076ad627385, type: 2}
     - target: {fileID: -4216859302048453862, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

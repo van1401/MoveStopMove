@@ -23,10 +23,12 @@ public class PlayerController : Character
 
     void Update()
     {
-        if (!isShooting)
+        if (canAttack)
         {
-            Move();
+
         }
+
+        Move();
         CheckDistance();
     }
 
@@ -43,7 +45,7 @@ public class PlayerController : Character
                 ChangeAnim("Run");
             }
         }
-        else { ChangeAnim("IsIdle"); }
+        else { ChangeAnim("Idle"); }
     }
 
     public Vector3 CheckGround(Vector3 nextPoint)

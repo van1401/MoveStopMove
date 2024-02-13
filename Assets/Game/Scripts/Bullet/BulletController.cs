@@ -10,7 +10,7 @@ public class BulletController : MonoBehaviour
     public Vector3 target;
     public bool targetSet;
     private float velocity = 5;
-    public float turnSpeed;
+    public float turnSpeed, lifeTime;
 
     void Update()
     {
@@ -36,5 +36,15 @@ public class BulletController : MonoBehaviour
         {
             SmartPool.Instance.Despawn(gameObject);
         }
+    }
+
+    IEnumerator BulletMove(Transform bulletTransform, Vector3 direction)
+    {
+        for (int i = 0; i < 60 * lifeTime; i++)
+        {
+            bulletTransform.Translate(direction * Time.deltaTime * speed);
+            yield return new WaitForEndOfFrame();
+        }
+        SmartPool.Instance.Despawn(gameObject);
     }
 }
