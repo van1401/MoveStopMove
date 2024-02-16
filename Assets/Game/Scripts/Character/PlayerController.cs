@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -23,11 +24,6 @@ public class PlayerController : Character
 
     void Update()
     {
-        if (canAttack)
-        {
-
-        }
-
         Move();
         CheckDistance();
     }
@@ -45,8 +41,11 @@ public class PlayerController : Character
                 ChangeAnim("Run");
             }
         }
-        else { ChangeAnim("Idle"); }
+        else if (!isDead)
+        { ChangeAnim("Idle"); }
     }
+
+
 
     public Vector3 CheckGround(Vector3 nextPoint)
     {
@@ -57,5 +56,44 @@ public class PlayerController : Character
             return hit.point + Vector3.up * 0.01f;
         }
         return transform.position;
+    }
+    void CheckDistance()
+    {
+        nearestEnemy = FindNearestEnemy();
+        if (nearestEnemy == null)
+        {
+            return;
+        }
+        dist = Vector3.Distance(transform.position, nearestEnemy.transform.position);
+        if (nearestEnemy != null && dist < checkRange)
+        {
+            Throw();
+            ChangeAnim("Attack");
+            skin.LookAt(nearestEnemy.transform.position);
+            transhoot.LookAt(nearestEnemy.transform.position);
+        }
+    }
+
+
+    public Transform FindNearestEnemy()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, checkingRadius, enemyLayer);
+
+        Transform nearestEnemy = null;
+        float closestDistanceSqr = Mathf.Infinity;
+        Vector3 currentPosition = transform.position;
+
+        foreach (Collider collider in colliders)
+        {
+            Vector3 directionToEnemy = collider.transform.position - currentPosition;
+            float sqrDistanceToEnemy = directionToEnemy.sqrMagnitude;
+
+            if (sqrDistanceToEnemy < closestDistanceSqr)
+            {
+                closestDistanceSqr = sqrDistanceToEnemy;
+                nearestEnemy = collider.transform;
+            }
+        }
+        return nearestEnemy;
     }
 }

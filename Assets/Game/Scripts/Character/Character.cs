@@ -17,8 +17,9 @@ public class Character : MonoBehaviour
     public Transform skin, transhoot, nearestEnemy;
     private string currentAnim;
     public int currentAmmo = 1, hp = 1;
+    public Vector3 targetEnemy;
     public LayerMask groundLayer, enemyLayer;
-    protected bool canAttack = true;
+    public bool canAttack = true, canMove = true, isDead = false;
   
 
     public void ChangeAnim(string animName)
@@ -34,19 +35,24 @@ public class Character : MonoBehaviour
         }
     }
 
-    protected IEnumerator Shoot(Vector3 targetedEnemyObj)
+    protected virtual IEnumerator Shoot(Vector3 targetedEnemyObj)
     {
-        if (currentAmmo > 0 && targetedEnemyObj != Vector3.zero)
+        if (targetedEnemyObj == Vector3.zero)
         {
-            //rb.velocity = Vector3.zero;
+            yield return null;
+        }
+        if (currentAmmo > 0 && targetedEnemyObj != Vector3.zero && canAttack)
+        {
+            canMove = false;
+            rb.velocity = Vector3.zero;
             targetedEnemyObj = nearestEnemy.transform.position;
             bulletPrefab.GetComponent<BulletController>().target = targetedEnemyObj;
             bulletPrefab.GetComponent<BulletController>().targetSet = true;
-            ChangeAnim("Attack");
-            canAttack = false;
+            transform.LookAt(targetedEnemyObj);
             var clone = SmartPool.Instance.Spawn(bulletPrefab, transhoot.transform.position, transform.rotation);
             clone.gameObject.GetComponent<BulletController>().target = targetedEnemyObj;
             clone.gameObject.GetComponent<BulletController>().targetSet = true;
+            canMove = true;
             currentAmmo -= 1;
             yield return new WaitForSeconds(1.5f);
             if (currentAmmo < 1)
@@ -71,48 +77,10 @@ public class Character : MonoBehaviour
         Vector3 scaleSize = orginalScale + (orginalScale * 0.05f);
         model.transform.DOScale(scaleSize, 1);
     }
-
-    protected virtual void CheckDistance()
-    {
-        nearestEnemy = FindNearestEnemy();
-        if (nearestEnemy == null)
-        {
-            return;
-        }
-        dist = Vector3.Distance(transform.position, nearestEnemy.transform.position);
-        if (nearestEnemy != null && dist < checkRange)
-        {
-            Throw();
-            skin.LookAt(nearestEnemy.transform.position);
-            transhoot.LookAt(nearestEnemy.transform.position);
-        }
-    }
-
-    protected virtual Transform FindNearestEnemy()
-    {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, checkingRadius, enemyLayer);
-
-        Transform nearestEnemy = null;
-        float closestDistanceSqr = Mathf.Infinity;
-        Vector3 currentPosition = transform.position;
-
-        foreach (Collider collider in colliders)
-        {
-            Vector3 directionToEnemy = collider.transform.position - currentPosition;
-            float sqrDistanceToEnemy = directionToEnemy.sqrMagnitude;
-
-            if (sqrDistanceToEnemy < closestDistanceSqr)
-            {
-                closestDistanceSqr = sqrDistanceToEnemy;
-                nearestEnemy = collider.transform;
-            }
-        }
-        return nearestEnemy;
-    }
-
     public void ResetAttack()
     {
         weapon.SetActive(true);
+        print("check anim");
         ChangeAnim("Idle");
         canAttack = true;
     }

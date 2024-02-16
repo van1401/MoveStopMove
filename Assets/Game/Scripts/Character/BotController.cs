@@ -34,6 +34,35 @@ public class BotController : Character
     }
 
 
+    protected override IEnumerator Shoot(Vector3 targetedEnemyObj)
+    {
+        if (targetedEnemyObj == Vector3.zero)
+        {
+            yield return null;
+        }
+        if (currentAmmo > 0 && targetedEnemyObj != Vector3.zero)
+        {
+            canMove = false;
+            rb.velocity = Vector3.zero;
+            ChangeAnim("Attack");
+            transform.LookAt(targetedEnemyObj);
+            canAttack = false;
+            targetedEnemyObj = nearestEnemy.transform.position;
+            bulletPrefab.GetComponent<BulletController>().target = targetedEnemyObj;
+            bulletPrefab.GetComponent<BulletController>().targetSet = true;
+            var clone = SmartPool.Instance.Spawn(bulletPrefab, transhoot.transform.position, transform.rotation);
+            clone.gameObject.GetComponent<BulletController>().target = targetedEnemyObj;
+            clone.gameObject.GetComponent<BulletController>().targetSet = true;
+            canMove = true;
+            currentAmmo -= 1;
+            yield return new WaitForSeconds(1.5f);
+            if (currentAmmo < 1)
+            {
+                currentAmmo += 1;
+            }
+        }
+    }
+
 
     void Move()
     {
@@ -96,8 +125,8 @@ public class BotController : Character
         if (nearestEnemy != null && dist < checkRange)
         {
             //StartCoroutine(Shoot(nearestEnemy.transform.position));
-            skin.LookAt(nearestEnemy.transform.position);
-            transhoot.LookAt(nearestEnemy.transform.position);
+            //skin.LookAt(nearestEnemy.transform.position);
+            //transhoot.LookAt(nearestEnemy.transform.position);
         }
     }
 

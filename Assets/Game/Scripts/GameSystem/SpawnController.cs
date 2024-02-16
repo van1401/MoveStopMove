@@ -11,7 +11,7 @@ public class SpawnController : MonoBehaviour
     public BotController botPrefab;
     private float timeBetweenWaves; //Thời gian spawn giữa các waves
     private float countdown = 2f; // thời gian đếm ngược để spawn
-    private int enemiesCountdown = 100; // số lượng enemies count down
+    private int enemiesCountdown = 50; // số lượng enemies count down
     private bool isSpawning = true; // Check true false count down
 
     
@@ -28,7 +28,7 @@ public class SpawnController : MonoBehaviour
 
     IEnumerator SpawnEnemyAtRandomPoint()
     {
-        timeBetweenWaves = Random.Range(1f, 2f);
+        timeBetweenWaves = Random.Range(3f, 5f);
         if (isSpawning && enemiesCountdown > 0) 
         {
             int randomIndex = Random.Range(0, spawnBotPosition.Count);

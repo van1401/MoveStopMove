@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public GameObject mainMenu, joystick, spawnController;
+    public GameObject mainMenu, joystick, spawnController, startingCamera, mainCamera;
     public Button startGame, weaponShop, skinShop;
 
 
@@ -20,5 +20,7 @@ public class UIManager : MonoBehaviour
         mainMenu.SetActive(false);
         joystick.SetActive(true);
         spawnController.SetActive(true);
+        startingCamera.SetActive(false);
+        mainCamera.SetActive(true);
     }
 }
