@@ -273,6 +273,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 6736121647075960377, guid: 46108d674e7d4244399b0388d2e91258, type: 3}
   model: {fileID: 6434645458842245712}
   detectionRange: {fileID: 2421197882753364857}
+  weapon: {fileID: 0}
   speed: 5
   checkRange: 5.7
   checkingRadius: 1000
@@ -283,12 +284,16 @@ MonoBehaviour:
   nearestEnemy: {fileID: 0}
   currentAmmo: 1
   hp: 1
+  targetEnemy: {x: 0, y: 0, z: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
+  canAttack: 1
+  canMove: 1
+  isDead: 0
   wanderRadius: 20
   wanderTimer: 6.5
   agent: {fileID: 4531498520673534428}
