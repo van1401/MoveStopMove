@@ -45,7 +45,6 @@ public class BotController : Character
             rb.velocity = Vector3.zero;
             ChangeAnim("Attack");
             transform.LookAt(targetedEnemyObj);
-            targetedEnemyObj = nearestEnemy.transform.position;
             bulletPrefab.GetComponent<BulletController>().target = targetedEnemyObj;
             bulletPrefab.GetComponent<BulletController>().targetSet = true;
             var clone = SmartPool.Instance.Spawn(bulletPrefab, transhoot.transform.position, transform.rotation);

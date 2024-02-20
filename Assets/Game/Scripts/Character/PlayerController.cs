@@ -70,7 +70,6 @@ public class PlayerController : Character
         if (nearestEnemy != null && dist < checkRange)
         {
             Throw();
-            ChangeAnim("Attack");
             skin.LookAt(nearestEnemy.transform.position);
             transhoot.LookAt(nearestEnemy.transform.position);
         }

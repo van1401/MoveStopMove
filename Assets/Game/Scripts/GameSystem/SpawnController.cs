@@ -7,7 +7,6 @@ using UnityEngine;
 public class SpawnController : MonoBehaviour
 {
     public List<Transform> spawnBotPosition = new List<Transform>();
-    public List<GameObject> botCount = new List<GameObject>();
     public BotController botPrefab;
     private float timeBetweenWaves; //Thời gian spawn giữa các waves
     private float countdown = 2f; // thời gian đếm ngược để spawn

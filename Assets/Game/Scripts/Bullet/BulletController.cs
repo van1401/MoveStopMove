@@ -22,10 +22,10 @@ public class BulletController : MonoBehaviour
         {
             SmartPool.Instance.Despawn(this.gameObject);
         }
-        Move();        
+        Rotate();        
     }
 
-    void Move() 
+    void Rotate() 
     {
         transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.x, transform.position.y, target.z), velocity * Time.deltaTime);
         transform.Rotate(0, 10, 0 * turnSpeed * Time.deltaTime);      
