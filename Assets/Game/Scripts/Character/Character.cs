@@ -19,7 +19,7 @@ public class Character : MonoBehaviour
     public int currentAmmo = 1, hp = 1;
     public Vector3 targetEnemy;
     public LayerMask groundLayer, enemyLayer;
-    public bool canAttack = true, canMove = true, isDead = false;
+    public bool  isDead = false, isShooting = false;
   
 
     public void ChangeAnim(string animName)
@@ -41,9 +41,8 @@ public class Character : MonoBehaviour
         {
             yield return null;
         }
-        if (currentAmmo > 0 && targetedEnemyObj != Vector3.zero && canAttack)
+        if (currentAmmo > 0 && targetedEnemyObj != Vector3.zero)
         {
-            canMove = false;
             rb.velocity = Vector3.zero;
             targetedEnemyObj = nearestEnemy.transform.position;
             bulletPrefab.GetComponent<BulletController>().target = targetedEnemyObj;
@@ -52,7 +51,6 @@ public class Character : MonoBehaviour
             var clone = SmartPool.Instance.Spawn(bulletPrefab, transhoot.transform.position, transform.rotation);
             clone.gameObject.GetComponent<BulletController>().target = targetedEnemyObj;
             clone.gameObject.GetComponent<BulletController>().targetSet = true;
-            canMove = true;
             currentAmmo -= 1;
             yield return new WaitForSeconds(1.5f);
             if (currentAmmo < 1)
@@ -66,6 +64,7 @@ public class Character : MonoBehaviour
     public void Throw()
     {
         weapon.SetActive(false);
+        isShooting = true;
         StartCoroutine(Shoot(nearestEnemy.transform.position));
     }
 
@@ -82,7 +81,7 @@ public class Character : MonoBehaviour
         weapon.SetActive(true);
         print("check anim");
         ChangeAnim("Idle");
-        canAttack = true;
+        isShooting = false;
     }
 }
 

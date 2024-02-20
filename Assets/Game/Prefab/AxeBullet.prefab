@@ -46,11 +46,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebcbeaba6e8ad3b4abe878aa548fcf1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
-  target: {x: -23.538101, y: 0.000575386, z: 26.15492}
+  speed: 1
+  target: {x: -16.280647, y: 0.000575386, z: 5.3472366}
   targetSet: 1
-  turnSpeed: 10
-  lifeTime: 0
+  turnSpeed: 5
+  lifeTime: 3
 --- !u!65 &5804593006114321570
 BoxCollider:
   m_ObjectHideFlags: 0

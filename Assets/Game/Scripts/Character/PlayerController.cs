@@ -41,6 +41,8 @@ public class PlayerController : Character
                 ChangeAnim("Run");
             }
         }
+        else if(isShooting)
+        { ChangeAnim("Attack"); }
         else if (!isDead)
         { ChangeAnim("Idle"); }
     }
