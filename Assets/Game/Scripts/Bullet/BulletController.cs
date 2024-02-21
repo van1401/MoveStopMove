@@ -10,7 +10,7 @@ public class BulletController : MonoBehaviour
     public Vector3 target;
     public bool targetSet;
     private float velocity = 5;
-    public float turnSpeed, lifeTime;
+    public float turnSpeed;
 
     void Update()
     {
@@ -38,13 +38,13 @@ public class BulletController : MonoBehaviour
         }
     }
 
-    IEnumerator BulletMove(Transform bulletTransform, Vector3 direction)
-    {
-        for (int i = 0; i < 60 * lifeTime; i++)
-        {
-            bulletTransform.Translate(direction * Time.deltaTime * speed);
-            yield return new WaitForEndOfFrame();
-        }
-        SmartPool.Instance.Despawn(gameObject);
-    }
+    //public void OnInit(Character character, Transform target)
+    //{
+    //    this.character = character;
+    //    this.target = target;
+    //    transform.forward = (target.position - transform.position).normalized;  
+    //    SmartPool.Instance.Despawn(gameObject);
+    //}
+
+    
 }

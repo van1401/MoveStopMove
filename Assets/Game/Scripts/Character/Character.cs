@@ -19,7 +19,7 @@ public class Character : MonoBehaviour
     public int currentAmmo = 1, hp = 1;
     public Vector3 targetEnemy;
     public LayerMask groundLayer, enemyLayer;
-    public bool  isDead = false, isShooting = false;
+    public bool isDead = false, isShooting = false, isRunning = false;
   
 
     public void ChangeAnim(string animName)
@@ -52,11 +52,10 @@ public class Character : MonoBehaviour
             clone.gameObject.GetComponent<BulletController>().target = targetedEnemyObj;
             clone.gameObject.GetComponent<BulletController>().targetSet = true;
             currentAmmo -= 1;
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1f);
             if (currentAmmo < 1)
-            {
-                currentAmmo += 1;
-            }
+            { currentAmmo += 1; }
+            isShooting = false;
         }
     }
 
@@ -69,6 +68,15 @@ public class Character : MonoBehaviour
     }
 
 
+    protected void onDead()
+    {
+        isDead = true; 
+        rb.velocity = Vector3.zero;
+        ChangeAnim("Dead");
+        SmartPool.Instance.Despawn(this.gameObject);
+        print("Die");
+    }
+
 
     protected void scaleUp()
     {
@@ -76,12 +84,12 @@ public class Character : MonoBehaviour
         Vector3 scaleSize = orginalScale + (orginalScale * 0.05f);
         model.transform.DOScale(scaleSize, 1);
     }
+
     public void ResetAttack()
     {
         weapon.SetActive(true);
         print("check anim");
         ChangeAnim("Idle");
-        isShooting = false;
     }
 }
 

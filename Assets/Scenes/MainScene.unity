@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.38223127, g: 0.4688933, b: 0.61398077, a: 1}
+  m_IndirectSpecularColor: {r: 0.38197267, g: 0.46862334, b: 0.613787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2439,7 +2439,7 @@ Transform:
   m_GameObject: {fileID: 546327749}
   serializedVersion: 2
   m_LocalRotation: {x: 0.17364816, y: 0, z: 0, w: 0.9848078}
-  m_LocalPosition: {x: 0, y: 5, z: -10}
+  m_LocalPosition: {x: 0, y: 5, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7854,6 +7854,7 @@ MonoBehaviour:
     m_Bits: 64
   isDead: 0
   isShooting: 0
+  isRunning: 0
 --- !u!4 &1765074687
 Transform:
   m_ObjectHideFlags: 0
@@ -8775,7 +8776,6 @@ MonoBehaviour:
   - {fileID: 1785139608}
   - {fileID: 1526150107}
   - {fileID: 1549020598}
-  botCount: []
   botPrefab: {fileID: 7716458602514345044, guid: bfc6866acb60a5b4fac22e2b45fa3ab4, type: 3}
 --- !u!1001 &1956571140
 PrefabInstance:

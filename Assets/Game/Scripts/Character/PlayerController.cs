@@ -39,12 +39,28 @@ public class PlayerController : Character
             {
                 skin.forward = JoystickController.direct;
                 ChangeAnim("Run");
+                isRunning = true;
+                isShooting = false;
+            }
+            else
+            {
+                ResetAttack();
+            }
+
+        }
+        else
+        {
+            if (isShooting && !isRunning)
+            {
+                Debug.Log("anim attack");
+                ChangeAnim("Attack");
+            }
+            else if(!isDead)
+            {
+                ChangeAnim("Idle");
+                isRunning = false;
             }
         }
-        else if(isShooting)
-        { ChangeAnim("Attack"); }
-        else if (!isDead)
-        { ChangeAnim("Idle"); }
     }
 
 
