@@ -6,6 +6,7 @@ using Sirenix.OdinInspector;
 using static UnityEngine.GraphicsBuffer;
 using Core.Pool;
 using DG.Tweening;
+using System;
 
 public class Character : MonoBehaviour
 {
@@ -19,8 +20,25 @@ public class Character : MonoBehaviour
     public int currentAmmo = 1, hp = 1;
     public Vector3 targetEnemy;
     public LayerMask groundLayer, enemyLayer;
-    public bool isDead = false, isShooting = false, isRunning = false;
-  
+    public List<Character> targets = new List<Character>();
+    protected Character target;
+    public bool isDead = false;
+    public bool isShooting = false;
+    public bool isRunning = false;
+    public bool isDancing = false;
+
+
+    public void Start()
+    {
+        OnInit();
+    }
+
+
+    private void OnInit()
+    {
+        hp = 1;
+        currentAmmo = 1; 
+    }
 
     public void ChangeAnim(string animName)
     {
@@ -66,15 +84,18 @@ public class Character : MonoBehaviour
         isShooting = true;
         StartCoroutine(Shoot(nearestEnemy.transform.position));
     }
+    public void ResetAttack()
+    {
+        weapon.SetActive(true);
+        ChangeAnim("Idle");
+    }
 
-
-    protected void onDead()
+    protected void OnDead()
     {
         isDead = true; 
         rb.velocity = Vector3.zero;
         ChangeAnim("Dead");
-        SmartPool.Instance.Despawn(this.gameObject);
-        print("Die");
+        SmartPool.Instance.Despawn(gameObject);
     }
 
 
@@ -85,11 +106,6 @@ public class Character : MonoBehaviour
         model.transform.DOScale(scaleSize, 1);
     }
 
-    public void ResetAttack()
-    {
-        weapon.SetActive(true);
-        print("check anim");
-        ChangeAnim("Idle");
-    }
+
 }
 

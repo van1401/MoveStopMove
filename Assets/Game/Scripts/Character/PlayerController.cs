@@ -24,13 +24,30 @@ public class PlayerController : Character
 
     void Update()
     {
-        Move();
+        ChangeLogicAnimation();
         CheckDistance();
     }
 
 
-    void Move()
+    void ChangeLogicAnimation()
     {
+        if (isDead)
+        {
+            return;
+        }
+
+        if (isShooting)
+        {
+            rb.velocity = Vector3.zero;
+            return;
+        }
+        //Shooting
+        if (nearestEnemy != null && dist < checkRange)
+        {
+            ChangeAnim("Attack");
+            Throw();
+        }
+        //Running
         if (Input.GetMouseButton(0))
         {
             Vector3 nextPoint = JoystickController.direct * speed * Time.deltaTime + transform.position;
@@ -40,26 +57,11 @@ public class PlayerController : Character
                 skin.forward = JoystickController.direct;
                 ChangeAnim("Run");
                 isRunning = true;
-                isShooting = false;
             }
-            else
-            {
-                ResetAttack();
-            }
-
         }
-        else
+        else if(!isShooting && !isDead) 
         {
-            if (isShooting && !isRunning)
-            {
-                Debug.Log("anim attack");
-                ChangeAnim("Attack");
-            }
-            else if(!isDead)
-            {
-                ChangeAnim("Idle");
-                isRunning = false;
-            }
+            ChangeAnim("Idle");
         }
     }
 
@@ -85,7 +87,6 @@ public class PlayerController : Character
         dist = Vector3.Distance(transform.position, nearestEnemy.transform.position);
         if (nearestEnemy != null && dist < checkRange)
         {
-            Throw();
             skin.LookAt(nearestEnemy.transform.position);
             transhoot.LookAt(nearestEnemy.transform.position);
         }
