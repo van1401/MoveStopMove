@@ -41,23 +41,21 @@ public class PlayerController : Character
             rb.velocity = Vector3.zero;
             return;
         }
-        //Shooting
-        if (nearestEnemy != null && dist < checkRange)
-        {
-            ChangeAnim("Attack");
-            Throw();
-        }
+
         //Running
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && JoystickController.direct != Vector3.zero)
         {
             Vector3 nextPoint = JoystickController.direct * speed * Time.deltaTime + transform.position;
             transform.position = CheckGround(nextPoint);
-            if (JoystickController.direct != Vector3.zero)
-            {
-                skin.forward = JoystickController.direct;
-                ChangeAnim("Run");
-                isRunning = true;
-            }
+            skin.forward = JoystickController.direct;
+            ChangeAnim("Run");
+            isRunning = true;
+        }
+        //Shooting
+        else if (nearestEnemy != null && dist < checkRange)
+        {
+            ChangeAnim("Attack");
+            Throw();
         }
         else if(!isShooting && !isDead) 
         {
