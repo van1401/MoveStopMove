@@ -63,6 +63,17 @@ public class PlayerController : Character
         }
     }
 
+    public void Throw()
+    {
+        weapon.SetActive(false);
+        isShooting = true;
+        StartCoroutine(Shoot(nearestEnemy.transform.position));
+    }
+    public void ResetAttack()
+    {
+        weapon.SetActive(true);
+        ChangeAnim("Idle");
+    }
 
 
     public Vector3 CheckGround(Vector3 nextPoint)

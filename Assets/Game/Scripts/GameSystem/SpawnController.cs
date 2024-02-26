@@ -6,8 +6,11 @@ using UnityEngine;
 
 public class SpawnController : MonoBehaviour
 {
+    public static SpawnController Instance;
     public List<Transform> spawnBotPosition = new List<Transform>();
+    public List<Transform> botList = new List<Transform>();
     public BotController botPrefab;
+    public GameObject botPosition;
     private float timeBetweenWaves; //Thời gian spawn giữa các waves
     private float countdown = 2f; // thời gian đếm ngược để spawn
     private int enemiesCountdown = 50; // số lượng enemies count down
@@ -32,8 +35,9 @@ public class SpawnController : MonoBehaviour
         {
             int randomIndex = Random.Range(0, spawnBotPosition.Count);
             Transform spawnPoint = spawnBotPosition[randomIndex];
-            SmartPool.Instance.Spawn(botPrefab.gameObject, spawnPoint.position, spawnPoint.rotation);
+            botPosition = SmartPool.Instance.Spawn(botPrefab.gameObject, spawnPoint.position, spawnPoint.rotation);
             enemiesCountdown -= 1;
+            botList.Add(botPosition.transform);
             yield return new WaitForSeconds(timeBetweenWaves);
         }
         else if(enemiesCountdown <=0)

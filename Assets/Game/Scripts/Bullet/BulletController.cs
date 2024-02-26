@@ -46,5 +46,10 @@ public class BulletController : MonoBehaviour
     //    SmartPool.Instance.Despawn(gameObject);
     //}
 
-    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.parent.CompareTag("Enemy") || other.transform.parent.CompareTag("Player"))
+        {
+        }
+    }
 }

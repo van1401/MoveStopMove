@@ -78,17 +78,7 @@ public class Character : MonoBehaviour
     }
 
 
-    public void Throw()
-    {
-        weapon.SetActive(false);
-        isShooting = true;
-        StartCoroutine(Shoot(nearestEnemy.transform.position));
-    }
-    public void ResetAttack()
-    {
-        weapon.SetActive(true);
-        ChangeAnim("Idle");
-    }
+
 
     protected void OnDead()
     {
