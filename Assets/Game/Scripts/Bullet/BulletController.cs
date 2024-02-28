@@ -64,13 +64,5 @@ public class BulletController : MonoBehaviour
     }
 }
 
-    //public void OnInit(Character character, Transform target)
-    //{
-    //    this.character = character;
-    //    this.target = target;
-    //    transform.forward = (target.position - transform.position).normalized;  
-    //    SmartPool.Instance.Despawn(gameObject);
-    //}
-
 
 

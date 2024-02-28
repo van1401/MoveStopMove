@@ -62,12 +62,23 @@ public class BotController : Character
     {
         if (isDead)
         {
+            agent.velocity = Vector3.zero;
+            isShooting = false;
             return;
         }
 
+        //Shooting
         if (isShooting)
         {
-            rb.velocity = Vector3.zero;
+            agent.velocity = Vector3.zero;
+            if (nearestEnemy != null && dist < checkRange)
+            {
+                StartCoroutine(Shoot(nearestEnemy.transform.position));
+                ChangeAnim("Attack");
+                weapon.SetActive(false);
+                isShooting = true;
+                Debug.Log("Called from animation");
+            }
             return;
         }
 
@@ -84,15 +95,7 @@ public class BotController : Character
             ChangeAnim("Run");
         }
 
-        //Shooting
-        else if (nearestEnemy != null && dist < checkRange)
-        {
-            StartCoroutine(Shoot(nearestEnemy.transform.position));
-            ChangeAnim("Attack");
-            weapon.SetActive(false);
-            isShooting = true;
-            Debug.Log("Called from animation");
-        }
+
         else if (!isShooting && !isDead)
         {
             ChangeAnim("Idle");
