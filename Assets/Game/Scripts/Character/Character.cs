@@ -66,8 +66,8 @@ public class Character : MonoBehaviour
             bulletPrefab.GetComponent<BulletController>().target = targetedEnemyObj;
             bulletPrefab.GetComponent<BulletController>().targetSet = true;
             transform.LookAt(targetedEnemyObj);
-            var clone = SmartPool.Instance.Spawn(bulletPrefab, transhoot.transform.position, transform.rotation);
-            bulletPrefab.GetComponent<BulletController>().SetShooter(this.gameObject);
+            var clone = Instantiate(bulletPrefab, transhoot.transform.position, transform.rotation);
+            bulletPrefab.GetComponent<BulletController>().SetShooter(this);
             clone.gameObject.GetComponent<BulletController>().target = targetedEnemyObj;
             clone.gameObject.GetComponent<BulletController>().targetSet = true;
             currentAmmo -= 1;
@@ -80,13 +80,12 @@ public class Character : MonoBehaviour
 
 
 
-
     public void TakeDamage(int damage)
     {
         hp -= damage;
         if(hp <= 0)
         {
-            Destroy(this.gameObject);
+            SmartPool.Instance.Despawn(gameObject);
         }
     }    
 

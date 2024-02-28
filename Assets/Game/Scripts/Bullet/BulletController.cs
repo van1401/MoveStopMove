@@ -12,17 +12,17 @@ public class BulletController : MonoBehaviour
     public bool targetSet;
     private float velocity = 5;
     public float turnSpeed;
-    public GameObject shooter;
+    public Character shooter;
 
     void Update()
     {
         if (target == null)
         {
-            SmartPool.Instance.Despawn(gameObject);
+            Destroy(this.gameObject);
         }
         if (Vector3.Distance(transform.position, new Vector3(target.x, transform.position.y, target.z)) < 0.3f)
         {
-            SmartPool.Instance.Despawn(this.gameObject);
+            Destroy(this.gameObject);
         }
         Rotate();        
     }
@@ -36,11 +36,11 @@ public class BulletController : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("DetectRange"))
         {
-            SmartPool.Instance.Despawn(gameObject);
+            Destroy(this.gameObject);
         }
     }
 
-    public void SetShooter(GameObject shooter)
+    public void SetShooter(Character shooter)
     {
         this.shooter = shooter;
     }
@@ -49,15 +49,19 @@ public class BulletController : MonoBehaviour
     {
         BotController enemy = other.GetComponent<BotController>();
         PlayerController player = other.GetComponent<PlayerController>();
-        if (enemy != null && shooter != null && shooter.CompareTag("Player"))
+        if (enemy != null && shooter != null && ((shooter is BotController && shooter != enemy)))
         {
             this.PostEvent(EventID.EnemyKill);
             enemy.TakeDamage(damage);
+            enemy.OnDead();
+            Debug.Log("enemy");
 
         }
-        else if (player != null && shooter != null && shooter.CompareTag("Enemy"))
+        else if (player != null && shooter != null && shooter is BotController)
         {
             player.TakeDamage(damage);
+            player.OnDead();
+            Debug.Log("player");
         }
     }
 }

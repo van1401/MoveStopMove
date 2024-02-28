@@ -26,7 +26,7 @@ public class PlayerController : Character
     void Update()
     {
         ChangeLogicAnimation();
-        //CheckDistance();
+        CheckDistance();
     }
 
 

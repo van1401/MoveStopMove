@@ -34,34 +34,6 @@ public class BotController : Character
     }
 
 
-    protected override IEnumerator Shoot(Vector3 targetedEnemyObj)
-    {
-        if (targetedEnemyObj == Vector3.zero)
-        {
-            yield return null;
-        }
-        if (currentAmmo > 0 && targetedEnemyObj != Vector3.zero)
-        {
-            ChangeAnim("Attack");
-            transform.LookAt(targetedEnemyObj);
-            bulletPrefab.GetComponent<BulletController>().target = targetedEnemyObj;
-            bulletPrefab.GetComponent<BulletController>().targetSet = true;
-            transform.LookAt(targetedEnemyObj);
-            skin.LookAt(targetedEnemyObj);
-            var clone = SmartPool.Instance.Spawn(bulletPrefab, transhoot.transform.position, transform.rotation);
-            rb.velocity = Vector3.zero;
-            bulletPrefab.GetComponent<BulletController>().SetShooter(this.gameObject);
-            clone.gameObject.GetComponent<BulletController>().target = targetedEnemyObj;
-            clone.gameObject.GetComponent<BulletController>().targetSet = true;
-            currentAmmo -= 1;
-            yield return new WaitForSeconds(1.5f);
-            if (currentAmmo < 1)
-            {
-                currentAmmo += 1;
-            }
-        }
-    }
-
 
     void ChangeLogicAnimation()
     {

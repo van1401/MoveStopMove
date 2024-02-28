@@ -47,10 +47,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  target: {x: -16.280647, y: 0.000575386, z: 5.3472366}
+  damage: 1
+  target: {x: -30.696518, y: 0.000575386, z: -34.34319}
   targetSet: 1
   turnSpeed: 5
-  lifeTime: 3
+  shooter: {fileID: 0}
 --- !u!65 &5804593006114321570
 BoxCollider:
   m_ObjectHideFlags: 0
