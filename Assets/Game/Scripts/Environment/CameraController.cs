@@ -11,13 +11,15 @@ public class CameraController : MonoBehaviour
     {
         if (playerTransform == null)
         {
-            playerTransform = PlayerController.Instance.transform;
+            playerTransform = PlayerController.Instance?.transform;
         }
-        else { return; }
     }
 
     void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, playerTransform.position + offset, Time.deltaTime * 5f);
+        if (playerTransform != null)
+        {
+            transform.position = Vector3.Lerp(transform.position, playerTransform.position + offset, Time.deltaTime * 5f);
+        }
     }
 }

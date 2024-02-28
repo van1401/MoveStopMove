@@ -49,18 +49,16 @@ public class BulletController : MonoBehaviour
     {
         BotController enemy = other.GetComponent<BotController>();
         PlayerController player = other.GetComponent<PlayerController>();
-        if (enemy != null && shooter != null && ((shooter is BotController && shooter != enemy)))
+        if (enemy != null && shooter != null && ((shooter is PlayerController||shooter is BotController && shooter != enemy)))
         {
             this.PostEvent(EventID.EnemyKill);
             enemy.TakeDamage(damage);
-            enemy.OnDead();
             Debug.Log("enemy");
 
         }
         else if (player != null && shooter != null && shooter is BotController)
         {
             player.TakeDamage(damage);
-            player.OnDead();
             Debug.Log("player");
         }
     }

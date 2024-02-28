@@ -61,7 +61,7 @@ public class PlayerController : Character
         else if(!isShooting && !isDead) 
         {
             ChangeAnim("Idle");
-        }
+        }  
     }
 
     public void Throw()
@@ -103,6 +103,30 @@ public class PlayerController : Character
         }
     }
 
+    protected override IEnumerator Shoot(Vector3 targetedEnemyObj)
+    {
+        if (targetedEnemyObj == Vector3.zero)
+        {
+            yield return null;
+        }
+        if (currentAmmo > 0 && targetedEnemyObj != Vector3.zero)
+        {
+            rb.velocity = Vector3.zero;
+            targetedEnemyObj = nearestEnemy.transform.position;
+            bulletPrefab.GetComponent<BulletController>().target = targetedEnemyObj;
+            bulletPrefab.GetComponent<BulletController>().targetSet = true;
+            transform.LookAt(targetedEnemyObj);
+            var clone = SmartPool.Instance.Spawn(bulletPrefab, transhoot.transform.position, transform.rotation);
+            clone.GetComponent<BulletController>().SetShooter(this);
+            clone.gameObject.GetComponent<BulletController>().target = targetedEnemyObj;
+            clone.gameObject.GetComponent<BulletController>().targetSet = true;
+            currentAmmo -= 1;
+            yield return new WaitForSeconds(1f);
+            if (currentAmmo < 1)
+            { currentAmmo += 1; }
+            isShooting = false;
+        }
+    }
     public Transform FindNearestEnemy()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, checkingRadius, enemyLayer);
