@@ -23,4 +23,6 @@ public class UIManager : MonoBehaviour
         startingCamera.SetActive(false);
         mainCamera.SetActive(true);
     }
+
+
 }

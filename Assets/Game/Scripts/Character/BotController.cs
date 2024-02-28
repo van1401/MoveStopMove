@@ -29,7 +29,7 @@ public class BotController : Character
 
     void Update()
     {
-        Move(); 
+        ChangeLogicAnimation(); 
         FindEnemyBot();
     }
 
@@ -63,11 +63,23 @@ public class BotController : Character
     }
 
 
-    void Move()
+    void ChangeLogicAnimation()
     {
+        if (isDead)
+        {
+            return;
+        }
+
+        if (isShooting)
+        {
+            rb.velocity = Vector3.zero;
+            return;
+        }
+
+        //Running
         timer += Time.deltaTime;
         if (timer >= wanderTimer)
-        {   
+        {
             Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, -1);
             agent.SetDestination(newPos);
             timer = 0;
@@ -76,8 +88,22 @@ public class BotController : Character
         {
             ChangeAnim("Run");
         }
-        else {ChangeAnim("Idle");}
-    }    
+
+        //Shooting
+        else if (nearestEnemy != null && dist < checkRange)
+        {
+            StartCoroutine(Shoot(nearestEnemy.transform.position));
+            ChangeAnim("Attack");
+            weapon.SetActive(false);
+            isShooting = true;
+            Debug.Log("Called from animation");
+        }
+        else if (!isShooting && !isDead)
+        {
+            ChangeAnim("Idle");
+            weapon.SetActive(true);
+        }
+    }
 
     public static Vector3 RandomNavSphere(Vector3 origin, float distance, int layermask)
     {
@@ -92,7 +118,6 @@ public class BotController : Character
         return navHit.position;
     }
 
-
     void FindEnemyBot()
     {
         LayerMask hitLayers = LayerMask.GetMask("Player") | LayerMask.GetMask("Enemy");
@@ -106,7 +131,7 @@ public class BotController : Character
             return;
         }
         dist = Vector3.Distance(transform.position, nearestEnemy.transform.position);
-        if (nearestEnemy != null && dist < checkRange)
+        if (nearestEnemy != null && dist < checkRange && rb.velocity == Vector3.zero)
         {
             StartCoroutine(Shoot(nearestEnemy.transform.position));
         }
