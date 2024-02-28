@@ -1,16 +1,18 @@
 using Core.Pool;
 using System.Collections;
 using System.Collections.Generic;
+using UniRx.Examples;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-    public int speed;
+    public int speed, damage = 1;
     public Vector3 target;
     public bool targetSet;
     private float velocity = 5;
     public float turnSpeed;
+    public GameObject shooter;
 
     void Update()
     {
@@ -38,6 +40,28 @@ public class BulletController : MonoBehaviour
         }
     }
 
+    public void SetShooter(GameObject shooter)
+    {
+        this.shooter = shooter;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        BotController enemy = other.GetComponent<BotController>();
+        PlayerController player = other.GetComponent<PlayerController>();
+        if (enemy != null && shooter != null && shooter.CompareTag("Player"))
+        {
+            this.PostEvent(EventID.EnemyKill);
+            enemy.TakeDamage(damage);
+
+        }
+        else if (player != null && shooter != null && shooter.CompareTag("Enemy"))
+        {
+            player.TakeDamage(damage);
+        }
+    }
+}
+
     //public void OnInit(Character character, Transform target)
     //{
     //    this.character = character;
@@ -46,5 +70,5 @@ public class BulletController : MonoBehaviour
     //    SmartPool.Instance.Despawn(gameObject);
     //}
 
-    
-}
+
+

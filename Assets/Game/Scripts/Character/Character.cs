@@ -67,6 +67,7 @@ public class Character : MonoBehaviour
             bulletPrefab.GetComponent<BulletController>().targetSet = true;
             transform.LookAt(targetedEnemyObj);
             var clone = SmartPool.Instance.Spawn(bulletPrefab, transhoot.transform.position, transform.rotation);
+            bulletPrefab.GetComponent<BulletController>().SetShooter(this.gameObject);
             clone.gameObject.GetComponent<BulletController>().target = targetedEnemyObj;
             clone.gameObject.GetComponent<BulletController>().targetSet = true;
             currentAmmo -= 1;
@@ -90,7 +91,16 @@ public class Character : MonoBehaviour
         ChangeAnim("Idle");
     }
 
-    protected void OnDead()
+    public void TakeDamage(int damage)
+    {
+        hp -= damage;
+        if(hp <= 0)
+        {
+            Destroy(this.gameObject);
+        }
+    }    
+
+    public void OnDead()
     {
         isDead = true; 
         rb.velocity = Vector3.zero;

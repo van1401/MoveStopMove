@@ -1,3 +1,4 @@
+using Core.Pool;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -25,7 +26,7 @@ public class PlayerController : Character
     void Update()
     {
         ChangeLogicAnimation();
-        CheckDistance();
+        //CheckDistance();
     }
 
 
@@ -75,6 +76,7 @@ public class PlayerController : Character
         }
         return transform.position;
     }
+
     void CheckDistance()
     {
         nearestEnemy = FindNearestEnemy();
@@ -89,7 +91,6 @@ public class PlayerController : Character
             transhoot.LookAt(nearestEnemy.transform.position);
         }
     }
-
 
     public Transform FindNearestEnemy()
     {
@@ -113,3 +114,4 @@ public class PlayerController : Character
         return nearestEnemy;
     }
 }
+

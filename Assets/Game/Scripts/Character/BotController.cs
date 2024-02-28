@@ -42,12 +42,15 @@ public class BotController : Character
         }
         if (currentAmmo > 0 && targetedEnemyObj != Vector3.zero)
         {
-            rb.velocity = Vector3.zero;
             ChangeAnim("Attack");
             transform.LookAt(targetedEnemyObj);
             bulletPrefab.GetComponent<BulletController>().target = targetedEnemyObj;
             bulletPrefab.GetComponent<BulletController>().targetSet = true;
+            transform.LookAt(targetedEnemyObj);
+            skin.LookAt(targetedEnemyObj);
             var clone = SmartPool.Instance.Spawn(bulletPrefab, transhoot.transform.position, transform.rotation);
+            rb.velocity = Vector3.zero;
+            bulletPrefab.GetComponent<BulletController>().SetShooter(this.gameObject);
             clone.gameObject.GetComponent<BulletController>().target = targetedEnemyObj;
             clone.gameObject.GetComponent<BulletController>().targetSet = true;
             currentAmmo -= 1;
@@ -75,21 +78,6 @@ public class BotController : Character
         }
         else {ChangeAnim("Idle");}
     }    
-
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Bullet"))
-        {
-            hp -= 1;
-            if (hp <= 0)
-            {
-                this.PostEvent(EventID.EnemyKill);
-                Debug.Log("Check destroy");
-                SmartPool.Instance.Despawn(gameObject);
-            }
-        }
-    }
 
     public static Vector3 RandomNavSphere(Vector3 origin, float distance, int layermask)
     {
@@ -120,9 +108,7 @@ public class BotController : Character
         dist = Vector3.Distance(transform.position, nearestEnemy.transform.position);
         if (nearestEnemy != null && dist < checkRange)
         {
-            //StartCoroutine(Shoot(nearestEnemy.transform.position));
-            //skin.LookAt(nearestEnemy.transform.position);
-            //transhoot.LookAt(nearestEnemy.transform.position);
+            StartCoroutine(Shoot(nearestEnemy.transform.position));
         }
     }
 
